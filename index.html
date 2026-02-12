@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="cursor-glow" aria-hidden="true"></div>
   <nav>
     <ul>
       <li><a href="index.html" aria-current="page">Home</a></li>
@@ -15,6 +16,7 @@
       <li><a href="contact/index.html">Contact</a></li>
       <li class="nav-github"><a href="https://github.com/krisp140" target="_blank" rel="noopener noreferrer">GitHub</a></li>
     </ul>
+    <div class="scroll-progress" aria-hidden="true"></div>
   </nav>
 
 <div class="coord coord--top">48.2082&deg; N</div>
@@ -44,5 +46,11 @@
   <footer>
     &copy; 2026 Kristian Praizner
   </footer>
+  <script>
+    document.addEventListener('mousemove', function(e) {
+      var g = document.querySelector('.cursor-glow');
+      if (g) { g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; }
+    });
+  </script>
 </body>
 </html>
