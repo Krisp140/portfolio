@@ -152,17 +152,17 @@ nav a {
   height: 56px;
   line-height: 56px;
   border-bottom: 2px solid transparent;
-  transition: color 0.3s, border-color 0.3s;
+  transition: color 0.3s, border-color 0.3s, border-bottom-width 0.2s;
 }
 
 nav a:hover {
   color: var(--text);
-  border-bottom-color: var(--accent);
+  border-bottom: 3px solid var(--accent);
 }
 
 nav a[aria-current="page"] {
   color: var(--accent);
-  border-bottom-color: var(--accent);
+  border-bottom: 4px solid var(--accent);
 }
 
 nav .nav-github {
@@ -300,19 +300,43 @@ li {
 }
 
 /* ---- Projects ---- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
 .project-card {
   position: relative;
   background: transparent;
   border: 1px solid var(--wire-strong);
-  padding: 2rem;
-  margin-bottom: 1.5rem;
   transition: border-color 0.4s, background 0.4s;
   animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:nth-child(2) { animation-delay: 0.1s; }
 .project-card:nth-child(3) { animation-delay: 0.2s; }
 .project-card:nth-child(4) { animation-delay: 0.3s; }
+
+.project-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--wire-strong);
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter 0.4s;
+}
+
+.project-card:hover .project-img {
+  filter: grayscale(0%) contrast(1);
+}
+
+.project-body {
+  padding: 1.5rem;
+}
 
 .project-card::before {
   content: '';
@@ -375,14 +399,26 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
-  max-width: 520px;
+  max-width: 640px;
   animation: fade-up 0.6s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.form-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem 2rem;
+  align-items: start;
+}
+
+.form-grid label {
+  padding-top: 0.85rem;
+}
+
+.form-grid textarea {
+  grid-column: 2;
+}
+
 label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 500;
@@ -625,8 +661,25 @@ footer {
     padding: 3rem var(--page-pad) 4rem;
   }
 
-  .project-card {
-    padding: 1.5rem;
+  .project-body {
+    padding: 1.25rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem 0;
+  }
+
+  .form-grid label {
+    padding-top: 0.5rem;
+  }
+
+  .form-grid textarea {
+    grid-column: 1;
   }
 
   .resume-entry h3 {
@@ -646,245 +699,6 @@ footer {
   }
 }
 
-/* ---- LASERS (MAXIMUM CHAOS — GPU OPTIMIZED) ---- */
-.laser-field {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9997;
-  overflow: hidden;
-  contain: strict;
-}
-
-/* Force all lasers onto GPU layers */
-.laser-h,
-.laser-v,
-.laser-d,
-.laser-flare {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* Horizontal sweeping laser — red */
-.laser-h {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    #ff1744 10%,
-    #fff 30%,
-    #ff5722 50%,
-    #fff 70%,
-    #ff1744 90%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 15px #ff1744,
-    0 0 40px #ff5722,
-    0 0 80px rgba(255, 23, 68, 0.6);
-  animation: laser-sweep-h 3s linear infinite;
-}
-
-/* Horizontal sweeping laser — cyan (reverse) */
-.laser-h:nth-child(2) {
-  animation-delay: 1.5s;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    #00e5ff 15%,
-    #fff 50%,
-    #00e5ff 85%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 15px #00e5ff,
-    0 0 40px rgba(0, 229, 255, 0.7),
-    0 0 80px rgba(0, 229, 255, 0.4);
-  animation: laser-sweep-h-reverse 2.5s linear infinite;
-}
-
-@keyframes laser-sweep-h {
-  0%   { transform: translate3d(0, -5px, 0);  opacity: 0; }
-  2%   { opacity: 1; }
-  98%  { opacity: 1; }
-  100% { transform: translate3d(0, 100vh, 0);  opacity: 0; }
-}
-
-@keyframes laser-sweep-h-reverse {
-  0%   { transform: translate3d(0, 100vh, 0);  opacity: 0; }
-  2%   { opacity: 1; }
-  98%  { opacity: 1; }
-  100% { transform: translate3d(0, -5px, 0);   opacity: 0; }
-}
-
-/* Vertical sweeping laser — green */
-.laser-v {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 3px;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    #76ff03 10%,
-    #fff 50%,
-    #76ff03 90%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 15px #76ff03,
-    0 0 40px rgba(118, 255, 3, 0.7),
-    0 0 80px rgba(118, 255, 3, 0.4);
-  animation: laser-sweep-v 4s linear infinite;
-  animation-delay: 0.5s;
-}
-
-@keyframes laser-sweep-v {
-  0%   { transform: translate3d(-5px, 0, 0);  opacity: 0; }
-  2%   { opacity: 1; }
-  98%  { opacity: 1; }
-  100% { transform: translate3d(100vw, 0, 0);  opacity: 0; }
-}
-
-/* Diagonal laser — purple slash */
-.laser-d {
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 20%,
-    #e040fb 35%,
-    #fff 50%,
-    #e040fb 65%,
-    transparent 80%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 15px #e040fb,
-    0 0 50px rgba(224, 64, 251, 0.7),
-    0 0 100px rgba(224, 64, 251, 0.4);
-  animation: laser-diag 3.5s ease-in-out infinite;
-  animation-delay: 1s;
-}
-
-@keyframes laser-diag {
-  0%   { transform: translateY(-30vh) rotate(-35deg);  opacity: 0; }
-  3%   { opacity: 1; }
-  97%  { opacity: 1; }
-  100% { transform: translateY(130vh) rotate(-35deg);  opacity: 0; }
-}
-
-/* Intersection flares */
-.laser-flare {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow:
-    0 0 10px #fff,
-    0 0 30px #fff,
-    0 0 60px #ff5722;
-  animation: flare-pulse 2s ease-in-out infinite;
-  animation-delay: 1.2s;
-  top: 40%;
-  left: 55%;
-}
-
-.laser-flare:nth-child(5) {
-  animation-delay: 2.5s;
-  top: 65%;
-  left: 25%;
-  box-shadow:
-    0 0 10px #fff,
-    0 0 30px #fff,
-    0 0 60px #00e5ff;
-}
-
-.laser-flare:nth-child(6) {
-  animation-delay: 0.5s;
-  top: 20%;
-  left: 75%;
-  box-shadow:
-    0 0 10px #fff,
-    0 0 30px #fff,
-    0 0 60px #76ff03;
-}
-
-@keyframes flare-pulse {
-  0%, 100% {
-    opacity: 0;
-    transform: scale3d(0, 0, 1);
-  }
-  15% {
-    opacity: 1;
-    transform: scale3d(3, 3, 1);
-  }
-  30% {
-    opacity: 0.8;
-    transform: scale3d(1.5, 1.5, 1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale3d(2.5, 2.5, 1);
-  }
-  70% {
-    opacity: 0;
-    transform: scale3d(0, 0, 1);
-  }
-}
-
-/* Ambient glow washes */
-.laser-field::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 30% 50%,
-    rgba(255, 23, 68, 0.08) 0%,
-    transparent 50%
-  );
-  will-change: opacity;
-  animation: ambient-glow 4s ease-in-out infinite alternate;
-}
-
-.laser-field::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 70% 40%,
-    rgba(0, 229, 255, 0.08) 0%,
-    transparent 50%
-  );
-  will-change: opacity;
-  animation: ambient-glow 3s 1s ease-in-out infinite alternate;
-}
-
-@keyframes ambient-glow {
-  0%   { opacity: 0.3; }
-  100% { opacity: 1; }
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .laser-h, .laser-v, .laser-d, .laser-flare,
-  .laser-field::before, .laser-field::after {
-    animation: none;
-    opacity: 0;
-  }
-}
 
 /* ---- Selection ---- */
 ::selection {

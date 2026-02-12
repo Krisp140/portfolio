@@ -17,16 +17,7 @@
     </ul>
   </nav>
 
-  <div class="laser-field">
-    <div class="laser-h"></div>
-    <div class="laser-h"></div>
-    <div class="laser-v"></div>
-    <div class="laser-d"></div>
-    <div class="laser-flare"></div>
-    <div class="laser-flare"></div>
-  </div>
-
-  <div class="coord coord--top">004 / Contact</div>
+<div class="coord coord--top">004 / Contact</div>
   <div class="coord coord--bottom">Signal open</div>
 
   <main>
@@ -35,20 +26,16 @@
     <p>Have a question or want to get in touch? Fill out the form below and I'll get back to you.</p>
 
     <form action="mailto:krisp@mit.edu" method="GET" enctype="text/plain">
-      <label>
-        Email
-        <input type="email" name="email" required placeholder="your@email.com">
-      </label>
+      <div class="form-grid">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="your@email.com">
 
-      <label>
-        Subject
-        <input type="text" name="subject" required placeholder="What is this about?">
-      </label>
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" required placeholder="What is this about?">
 
-      <label>
-        Message
-        <textarea name="body" required placeholder="Write your message here..."></textarea>
-      </label>
+        <label for="message">Message</label>
+        <textarea id="message" name="body" required placeholder="Write your message here..."></textarea>
+      </div>
 
       <button type="submit">Send</button>
     </form>
