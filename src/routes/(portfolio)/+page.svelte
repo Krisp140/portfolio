@@ -38,7 +38,7 @@
   <h2>Featured Projects</h2>
   <div class="home-section-heading">
     <span></span>
-    <a href="{base}/projects">View all projects &rarr;</a>
+    <a href="{base}/projects/">View all projects &rarr;</a>
   </div>
   <div class="projects-grid">
     {#each featuredProjects as project}

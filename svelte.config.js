@@ -11,7 +11,9 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? '' : '/portfolio'
+			base: process.argv.includes('dev') ? '' : '/portfolio',
+			// Root-relative paths so assets load correctly from /portfolio/projects/ etc.
+			relative: false
 		}
 	}
 };

@@ -5,7 +5,7 @@ export const projects = [
       'An exploratory data analysis of the Boston Housing dataset. Interactive Plotly charts examine correlations between socioeconomic factors and median home values.',
     image: '/images/housing.jpg',
     tags: ['Data Visualization', 'Plotly', 'Python', 'EDA'],
-    link: '/A2',
+    link: '/A2/',
     featured: true
   },
   {
