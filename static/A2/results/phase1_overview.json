@@ -1,0 +1,318 @@
+{
+  "total_rows": 49301,
+  "price_histogram": {
+    "labels": [
+      "$0K\u2013$500K",
+      "$500K\u2013$1000K",
+      "$1000K\u2013$1500K",
+      "$1500K\u2013$2000K",
+      "$2000K\u2013$2500K",
+      "$2500K\u2013$3000K",
+      "$3000K\u2013$3500K",
+      "$3500K\u2013$4000K",
+      "$4000K\u2013$4500K",
+      "$4500K\u2013$5000K",
+      "$5000K\u2013$5500K",
+      "$5500K\u2013$6000K",
+      "$6000K\u2013$6500K",
+      "$6500K\u2013$7000K",
+      "$7000K\u2013$7500K",
+      "$7500K\u2013$8000K",
+      "$8000K\u2013$8500K",
+      "$8500K\u2013$9000K",
+      "$9000K\u2013$9500K",
+      "$9500K\u2013$10000K"
+    ],
+    "counts": [
+      18224,
+      16650,
+      5332,
+      3004,
+      1609,
+      1211,
+      654,
+      467,
+      320,
+      235,
+      236,
+      145,
+      126,
+      98,
+      48,
+      53,
+      53,
+      37,
+      55,
+      34
+    ],
+    "bucket_size_usd": 500000
+  },
+  "annual_summary": {
+    "years": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "counts": [
+      2524,
+      1943,
+      2432,
+      2323,
+      3205,
+      2810,
+      2576,
+      2396,
+      2049,
+      1572,
+      1698,
+      1767,
+      2302,
+      2338,
+      1996,
+      1959,
+      1996,
+      1857,
+      1864,
+      1875,
+      1516,
+      2256,
+      2047
+    ],
+    "median": [
+      349000.0,
+      392645.0,
+      387000.0,
+      412500.0,
+      483000.0,
+      530000.0,
+      522732.0,
+      536500.0,
+      550000.0,
+      530000.0,
+      580000.0,
+      617500.0,
+      621000.0,
+      650000.0,
+      739000.0,
+      790000.0,
+      845000.0,
+      920000.0,
+      995000.0,
+      1102500.0,
+      1093750.0,
+      980000.0,
+      1075000.0
+    ]
+  },
+  "style_price_per_sqft": [
+    {
+      "style": "HIGH-RISE",
+      "median_psf": 809.35,
+      "count": 7613
+    },
+    {
+      "style": "SEMI DETACHD",
+      "median_psf": 765.38,
+      "count": 62
+    },
+    {
+      "style": "ROW-MIDDLE",
+      "median_psf": 686.24,
+      "count": 17692
+    },
+    {
+      "style": "MID-RISE",
+      "median_psf": 662.85,
+      "count": 12216
+    },
+    {
+      "style": "ROW-END",
+      "median_psf": 652.71,
+      "count": 5255
+    },
+    {
+      "style": "FREE-STANDNG",
+      "median_psf": 630.58,
+      "count": 429
+    },
+    {
+      "style": "LOW-RISE",
+      "median_psf": 586.4,
+      "count": 2125
+    },
+    {
+      "style": "CONDO/APT",
+      "median_psf": 497.56,
+      "count": 850
+    },
+    {
+      "style": "RAISED CAPE",
+      "median_psf": 451.54,
+      "count": 60
+    }
+  ],
+  "construction_era": [
+    {
+      "era": "1800s",
+      "range": "1800\u20131819",
+      "median": 1180000,
+      "count": 60
+    },
+    {
+      "era": "1820s",
+      "range": "1820\u20131839",
+      "median": 1520000,
+      "count": 236
+    },
+    {
+      "era": "1840s",
+      "range": "1840\u20131859",
+      "median": 655000,
+      "count": 1312
+    },
+    {
+      "era": "1860s",
+      "range": "1860\u20131879",
+      "median": 751800,
+      "count": 3094
+    },
+    {
+      "era": "1880s",
+      "range": "1880\u20131899",
+      "median": 601000,
+      "count": 15797
+    },
+    {
+      "era": "1900s",
+      "range": "1900\u20131919",
+      "median": 530000,
+      "count": 10818
+    },
+    {
+      "era": "1920s",
+      "range": "1920\u20131939",
+      "median": 535000,
+      "count": 3449
+    },
+    {
+      "era": "1940s",
+      "range": "1940\u20131959",
+      "median": 463000,
+      "count": 442
+    },
+    {
+      "era": "1960s",
+      "range": "1960\u20131979",
+      "median": 509000,
+      "count": 2895
+    },
+    {
+      "era": "1980s",
+      "range": "1980\u20131999",
+      "median": 789750,
+      "count": 2551
+    },
+    {
+      "era": "2000s",
+      "range": "2000\u20132019",
+      "median": 990000,
+      "count": 7155
+    },
+    {
+      "era": "2020s",
+      "range": "2020\u20132039",
+      "median": 915000,
+      "count": 55
+    }
+  ],
+  "data_quality": {
+    "price": {
+      "missing": 0,
+      "zero": 0,
+      "note": "Complete; 1 record = $999,999,999 (likely data error)"
+    },
+    "intersf": {
+      "missing": 0,
+      "zero": 431,
+      "note": "Zero-sqft records excluded from $/sqft analyses"
+    },
+    "bedrooms": {
+      "missing": 0,
+      "zero": 6151,
+      "note": "Many condos legitimately coded as 0-bedroom studios"
+    },
+    "bathrooms": {
+      "missing": 0,
+      "zero": 3445,
+      "note": "Similar pattern to bedrooms"
+    },
+    "yearbuilt": {
+      "missing": 66,
+      "zero": 1369,
+      "note": "~3% of records lack construction year"
+    },
+    "lat": {
+      "missing": 0,
+      "zero": 456,
+      "note": "Un-geocoded records excluded from geographic analyses"
+    },
+    "lon": {
+      "missing": 0,
+      "zero": 456,
+      "note": "Un-geocoded records excluded from geographic analyses"
+    },
+    "zip": {
+      "missing": 0,
+      "zero": 0,
+      "note": "Complete; 38 unique ZIP codes"
+    }
+  },
+  "bedroom_distribution": {
+    "bedrooms": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "counts": [
+      6151,
+      18090,
+      18800,
+      4501,
+      1117,
+      449,
+      132,
+      34,
+      10,
+      10,
+      3
+    ]
+  }
+}
