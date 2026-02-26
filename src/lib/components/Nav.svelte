@@ -1,6 +1,7 @@
 <script>
   import { page } from '$app/state';
   import { base } from '$app/paths';
+  import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
 </script>
 
 <nav>
@@ -10,6 +11,7 @@
     <li><a href="{base}/resume/" aria-current={page.url.pathname === `${base}/resume/` ? 'page' : undefined}>Resume</a></li>
     <li><a href="{base}/contact/" aria-current={page.url.pathname === `${base}/contact/` ? 'page' : undefined}>Contact</a></li>
     <li class="nav-github"><a href="https://github.com/krisp140" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    <li class="nav-theme"><ThemeSwitcher /></li>
   </ul>
   <div class="scroll-progress" aria-hidden="true"></div>
 </nav>

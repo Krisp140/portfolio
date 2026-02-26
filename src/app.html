@@ -6,6 +6,12 @@
 	%sveltekit.head%
 </head>
 <body data-sveltekit-prerender="true">
+	<script>
+		(function() {
+			var theme = localStorage.getItem('theme') || 'dark';
+			document.documentElement.setAttribute('data-theme', theme);
+		})();
+	</script>
 	<div style="display: contents">%sveltekit.body%</div>
 </body>
 </html>
