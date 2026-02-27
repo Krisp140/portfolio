@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A3 · Visualization Design: COVID-19 in the United States</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafaf8;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #c23728;
+      --accent-light: rgba(194,55,40,0.12);
+      --border: #e0ddd8;
+      --card-bg: #ffffff;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .page {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* Masthead */
+    .masthead {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .masthead-kicker {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .masthead h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .masthead h1 em {
+      font-weight: 300;
+      font-style: italic;
+    }
+    .masthead-meta {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .masthead-meta .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+
+    /* Section headings */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 3rem 0 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 2rem 0 0.75rem;
+      color: var(--accent);
+    }
+
+    p { margin-bottom: 1rem; }
+
+    /* Bullet lists */
+    ul {
+      margin: 0.5rem 0 1.5rem 1.5rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    ul li strong {
+      color: var(--accent);
+    }
+
+    /* Original visualization image */
+    .orig-viz {
+      max-width: 540px;
+      margin: 1.5rem auto 2rem;
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    /* Sketch placeholders */
+    .sketch-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+    .sketch-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+    .sketch-card .sketch-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .sketch-card .sketch-placeholder {
+      width: 100%;
+      height: 300px;
+      background: #f5f3ee;
+      border: 2px dashed var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .sketch-card img {
+      max-width: 440px;
+      width: 100%;
+      display: block;
+      margin: 0 auto 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    /* Chart container */
+    .chart-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .chart-container .chart-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .chart-container .chart-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .chart-container .chart-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* D3 chart styles */
+    #final-chart svg {
+      display: block;
+      margin: 0 auto;
+    }
+    #final-chart canvas {
+      border-radius: 6px;
+    }
+
+    /* Writeup callout */
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .callout strong {
+      color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .page { padding: 1.5rem 1rem 3rem; }
+      .masthead h1 { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ─── MASTHEAD ─── -->
+  <div class="masthead">
+    <div class="masthead-kicker">A3 &middot; Visualization Design</div>
+    <h1>Redesigning the COVID-19 Spiral<br/></h1>
+    <div class="masthead-meta">
+      <span><span class="dot"></span>Dataset: Google COVID-19 Open Data (US)</span>
+      <span><span class="dot"></span>Jan 2020 &ndash; Sep 2022</span>
+      <span><span class="dot"></span>978 daily records</span>
+      <span><span class="dot"></span>Analysis: February 2026</span>
+    </div>
+  </div>
+
+  <!-- ─── STEP 1: DATA INSIGHTS ─── -->
+  <h2>Step 1 &middot; Reading the Visualization</h2>
+
+  <p>The original visualization, published by the <em>New York Times</em>, uses a spiral form to display daily new COVID-19 cases in the United States from early 2020 through January 2022. Each revolution of the spiral represents one calendar year, with months marked along radial axes. The radial distance from the center encodes the volume of new daily cases, and a pink band represents a range which is likely the raw daily counts.</p>
+
+  <!-- INSERT: original visualization image here if desired -->
+  <img class="orig-viz" src="nyt.png" alt="NYT spiral visualization of COVID-19 cases" />
+
+  <h3>Key Insights from the Data</h3>
+  <ul>
+    <li><strong>Omicron dwarfed all previous waves:</strong> The January 2022 peak (the outermost spike near the top of the spiral) reached over 1.4 million daily new cases at its apex, roughly 5&times; larger than any prior wave. This is the most visually dramatic feature of the spiral.</li>
+    <li><strong>Winter surges are a recurring pattern:</strong> Each year shows a pronounced case spike in the December&ndash;January period: the winter 2020&ndash;21 wave (~300K daily cases), the Delta-driven late 2021 surge, and the historic Omicron wave of January 2022. The seasonal pattern is one thing the spiral form communicates well.</li>
+    <li><strong>The summer 2021 Delta wave:</strong> A visible bulge near the July mark of the 2021 ring shows the Delta variant surge, which peaked around 150&ndash;200K daily cases which is significant but modest compared to the winter waves.</li>
+    
+  </ul>
+
+  <!-- ─── STEP 2: CRITIQUE ─── -->
+  <h2>Step 2 &middot; Critique of the Original Design</h2>
+
+  <p>The spiral visualization is visually striking and succeeds as an attention-grabbing editorial piece. The choice to wrap time in a spiral rather than a line makes seasonal comparison intuitive: you can see at a glance that winter months consistently produce surges. The dramatic outward spike of the Omicron wave in January 2022 creates a powerful visual metaphor for how the variant "broke the pattern" of prior waves, and the gradual widening of each annual ring communicates escalation without needing to read any numbers. The labeling is minimal but functional, and the visual hierarchy (bold title, subtle month labels, year annotations along the spiral) guides the reader's eye from the outside in.</p>
+
+  <p>However, the spiral form introduces several readability challenges. First, radial distance is one of the least accurate visual encodings for quantitative comparison. It is very difficult to judge whether the summer 2021 Delta wave was 60% or 80% as large as the winter 2020&ndash;21 surge. Second, the wide pink band adds visual noise without a clear legend explaining what it encodes. Third, the scale reference is disconnected from the data and easy to overlook, making it hard to attach concrete numbers to the visual. Finally, the reading order is unintuitive: does one start at the center (chronological beginning) or the outside (the most dramatic feature)? I noticed the Omicron spike first but then had to mentally rewind to the center to reconstruct the chronological narrative, creating cognitive friction. A linear time axis would resolve most of these issues at the cost of sacrificing the spiral's seasonal-comparison affordance and editorial punch.</p>
+
+  <!-- ─── STEP 3: SKETCHES ─── -->
+  <h2>Step 3 &middot; Sketches</h2>
+
+  <div class="sketch-grid">
+
+    <div class="sketch-card">
+      <div class="sketch-label">Sketch 1</div>
+      <img class="sketch1" src="sketch1.png" alt="Sketch 1" />
+      <h3>Rationale</h3>
+      <ul>
+        <li><strong>Motivation:</strong> I wanted to use a standard line chart with a linear time axis to address the readability issues of the spiral.</li>
+        <li><strong>Intended message:</strong> I wanted to communicate the cyclical, year-over-year nature of pandemic waves and the dramatic Omicron wave in January 2022.</li>
+        <li><strong>What worked:</strong> The linear time axis is easy to read and understand.</li>
+        <li><strong>What didn't:</strong> The spiral is more visually striking and engaging than the line chart.</li>
+        <li><strong>Next exploration:</strong> I would like to explore a faceted area chart to compare the different waves year by year.</li>
+      </ul>
+    </div>
+
+    <div class="sketch-card">
+      <div class="sketch-label">Sketch 2</div>
+      <img class="sketch2" src="sketch2.png" alt="Sketch 2" />
+      <h3>Rationale</h3>
+      <ul>
+        <li><strong>Motivation:</strong> I wanted to use a faceted area chart to compare the different waves year by year.</li>
+        <li><strong>Intended message:</strong> I wanted to communicate the cyclical, year-over-year nature of pandemic waves and the dramatic Omicron wave in January 2022.</li>
+        <li><strong>What worked:</strong> The faceted area chart is easy to read and understand.</li>
+        <li><strong>What didn't:</strong> The spiral is more visually striking and engaging than the faceted area chart.</li>
+        <li><strong>Next exploration:</strong> I would like to explore a nonlinear chart type to match the engagement of the spiral.</li>
+      </ul>
+    </div>
+
+    <div class="sketch-card">
+      <div class="sketch-label">Sketch 3</div>
+      <img class="sketch3" src="sketch3.png" alt="Sketch 3" />
+      <h3>Rationale</h3>
+      <ul>
+        <li><strong>Motivation:</strong> I wanted to use a non chronological approach to show how the COVID cases grew year after year. </li>
+        <li><strong>Intended message:</strong> I wanted to communicate how the number of cases grew with each passing year. </li>
+        <li><strong>What worked:</strong> The circles are visually effective in how they demonstrate the total amount of cases being the area. </li>
+        <li><strong>What didn't:</strong> Hard to draw these circles whose area represents a numerical value accurately. Also hard to label the circles. </li>
+        <li><strong>Next exploration:</strong> I'd like to put all these together to form a overall appealing graph without sacrificing numerical accuracy while maintaining visual appeal. </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ─── STEP 5: FINAL VISUALIZATION ─── -->
+  <h2>Step 4 &middot; Final Visualization</h2>
+
+  <div class="chart-container" style="padding:0;overflow:hidden;position:relative;">
+    <div id="final-chart" style="width:100%;height:600px;"></div>
+    <div id="chart-overlay" style="position:absolute;top:16px;left:20px;pointer-events:none;">
+      <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:#1a1a1a;">The Pandemic Landscape</div>
+      <div style="font-family:var(--serif);font-size:12px;color:#6b6b6b;margin-top:2px;">Daily new COVID-19 cases, U.S. &mdash; terrain height = 7-day avg, color = case fatality rate</div>
+    </div>
+    <div id="chart-legend" style="position:absolute;bottom:16px;left:20px;pointer-events:none;font-family:var(--mono);font-size:10px;color:#888;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+        <span style="display:inline-block;width:60px;height:10px;border-radius:3px;background:linear-gradient(to right,#2b6ca3,#e8d44d,#c23728,#5a0d14);"></span>
+        <span>Low CFR &rarr; High CFR</span>
+      </div>
+      <div>Drag to orbit &middot; Scroll to zoom &middot; Source: Google COVID-19 Open Data</div>
+    </div>
+  </div>
+
+  <!-- ─── STEP 6: FINAL WRITEUP ─── -->
+  <h2>Step 5 &middot; Design Rationale &amp; Reflection</h2>
+
+  <p>My final visualization uses a 3D terrain metaphor to communicate two central messages: (1) the sheer scale difference between the Omicron wave and all prior surges, and (2) the divergence between case volume and lethality over the course of the pandemic. Each of the three years (2020, 2021, 2022) is rendered as a separate ribbon of terrain arranged along the depth (Z) axis, with time-of-year running left to right (X axis) and case volume mapped to vertical height (Y axis). I applied a square-root scale to the height encoding so that the enormous Omicron peak does not flatten the earlier waves into invisibility, while still preserving a clear sense of magnitude difference. The second encoding layer is color: each point on the terrain surface is colored by the case fatality rate (deaths &divide; cases), using a blue-to-yellow-to-red gradient. This dual encoding allows the viewer to immediately see that early 2020, though modest in case volume, was the deadliest period per infection, while the towering Omicron ridge is predominantly blue, reflecting its far lower fatality rate. I chose a 7-day rolling average as a data transformation to smooth out the severe day-of-week reporting artifacts (weekends consistently underreported). The interactive orbit controls let the viewer rotate and zoom to compare years from different angles, partially compensating for the occlusion inherent in any 3D representation. However, the 3D perspective does obscure precise quantitative comparison and the back ribbons (2020) can be partially hidden behind the front ones depending on the viewing angle. Additionally, the choice to separate years into discrete ribbons rather than a continuous surface means the late-December-to-January transition between years (where the winter 2020&ndash;21 surge and the Omicron onset both occurred) is visually split across two ribbons, potentially downplaying the continuity of those surges.</p>
+
+  <p>Reflecting on the critiques I raised in Step 2, the 3D terrain design directly addresses several of them while failing to resolve others. My primary critique of the NYT spiral was that radial distance is a poor encoding for quantitative comparison. The terrain's vertical height channel is more perceptually accurate, especially with the sqrt scale preserving visibility of smaller waves. The spiral's lack of a clear scale reference is addressed here through labeled height markers and the interactive ability to zoom in on specific regions. The spiral's ambiguous reading order (center-out vs. outside-in) is replaced by a natural left-to-right, front-to-back arrangement that follows both chronological time and calendar alignment simultaneously. However, the process of critique-by-redesign revealed a fundamental tension I had not anticipated: the spiral's greatest strength &mdash; its ability to overlay years concentrically for direct seasonal comparison &mdash; is actually difficult to replicate in any alternative layout. I also discovered that my critique of the spiral's "visual noise" from the pink band was somewhat unfair; when I attempted to encode a second variable (fatality rate via color), I introduced my own form of visual complexity that demands explanation. Ultimately, this redesign process taught me that the spiral was a more carefully considered design than my initial critique suggested: its weaknesses in precision were deliberate tradeoffs for editorial impact and seasonal-comparison affordance, and any alternative that tries to improve on one axis inevitably sacrifices something on another.</p>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    Dataset: Google COVID-19 Open Data (US)<br/>
+    Original visualization: <em>New York Times</em> spiral chart of U.S. COVID-19 cases<br/>
+    Analysis conducted February 2026
+  </footer>
+
+</div>
+
+<!-- ─── THREE.JS 3D FINAL VISUALIZATION ─── -->
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ─── DATA & THREE.JS 3D TERRAIN ───
+const RAW_DATA = [["2020-01-13",0,0],["2020-01-14",0,0],["2020-01-15",0,0],["2020-01-16",0,0],["2020-01-17",0,0],["2020-01-18",0,0],["2020-01-19",1,0],["2020-01-20",0,0],["2020-01-21",1,0],["2020-01-22",4,0],["2020-01-23",1,0],["2020-01-24",1,0],["2020-01-25",0,0],["2020-01-26",2,0],["2020-01-27",0,0],["2020-01-28",0,0],["2020-01-29",0,0],["2020-01-30",1,0],["2020-01-31",1,0],["2020-02-01",0,0],["2020-02-02",3,0],["2020-02-03",2,0],["2020-02-04",2,0],["2020-02-05",0,0],["2020-02-06",2,0],["2020-02-07",1,0],["2020-02-08",0,0],["2020-02-09",0,0],["2020-02-10",1,0],["2020-02-11",0,0],["2020-02-12",1,0],["2020-02-13",2,0],["2020-02-14",2,0],["2020-02-15",0,0],["2020-02-16",0,0],["2020-02-17",2,0],["2020-02-18",0,0],["2020-02-19",1,0],["2020-02-20",2,0],["2020-02-21",6,0],["2020-02-22",4,0],["2020-02-23",1,0],["2020-02-24",9,0],["2020-02-25",5,0],["2020-02-26",19,2],["2020-02-27",4,1],["2020-02-28",8,2],["2020-02-29",12,1],["2020-03-01",17,3],["2020-03-02",47,3],["2020-03-03",56,3],["2020-03-04",75,2],["2020-03-05",75,5],["2020-03-06",154,7],["2020-03-07",140,1],["2020-03-08",169,4],["2020-03-09",306,4],["2020-03-10",432,2],["2020-03-11",427,6],["2020-03-12",669,9],["2020-03-13",859,5],["2020-03-14",1031,8],["2020-03-15",1264,15],["2020-03-16",1708,23],["2020-03-17",2130,24],["2020-03-18",3356,26],["2020-03-19",4638,51],["2020-03-20",6073,70],["2020-03-21",6964,62],["2020-03-22",9230,145],["2020-03-23",11211,102],["2020-03-24",10933,235],["2020-03-25",12660,242],["2020-03-26",17585,313],["2020-03-27",19227,412],["2020-03-28",19785,550],["2020-03-29",19721,507],["2020-03-30",21180,583],["2020-03-31",25015,909],["2020-04-01",26163,1006],["2020-04-02",28183,1174],["2020-04-03",31991,1288],["2020-04-04",32993,1477],["2020-04-05",25829,1337],["2020-04-06",28385,1313],["2020-04-07",30493,2042],["2020-04-08",30930,1999],["2020-04-09",34868,2053],["2020-04-10",33793,2081],["2020-04-11",31290,2078],["2020-04-12",28249,1698],["2020-04-13",24162,1630],["2020-04-14",26036,2354],["2020-04-15",29656,2540],["2020-04-16",31293,2196],["2020-04-17",31598,2116],["2020-04-18",27627,1896],["2020-04-19",26919,1764],["2020-04-20",24401,1814],["2020-04-21",27380,2476],["2020-04-22",29175,2148],["2020-04-23",31984,1803],["2020-04-24",31221,1971],["2020-04-25",40992,1634],["2020-04-26",26907,1210],["2020-04-27",22732,1273],["2020-04-28",24937,2078],["2020-04-29",26238,2686],["2020-04-30",30307,2154],["2020-05-01",32623,1812],["2020-05-02",29263,1520],["2020-05-03",25828,1247],["2020-05-04",22240,981],["2020-05-05",22460,2494],["2020-05-06",25149,1929],["2020-05-07",27293,2732],["2020-05-08",27149,1787],["2020-05-09",25206,1459],["2020-05-10",21375,1026],["2020-05-11",18057,887],["2020-05-12",22413,1516],["2020-05-13",21389,1725],["2020-05-14",26623,1845],["2020-05-15",25732,1535],["2020-05-16",23710,1249],["2020-05-17",20517,862],["2020-05-18",20538,852],["2020-05-19",20564,1325],["2020-05-20",21432,1396],["2020-05-21",26561,1382],["2020-05-22",24064,1288],["2020-05-23",22525,1034],["2020-05-24",19276,691],["2020-05-25",18333,557],["2020-05-26",16572,669],["2020-05-27",19265,1340],["2020-05-28",22803,1235],["2020-05-29",23848,1175],["2020-05-30",23358,923],["2020-05-31",21696,655],["2020-06-01",19966,676],["2020-06-02",19964,984],["2020-06-03",20146,973],["2020-06-04",20512,882],["2020-06-05",23087,834],["2020-06-06",22666,709],["2020-06-07",19033,450],["2020-06-08",16979,674],["2020-06-09",16908,895],["2020-06-10",20892,893],["2020-06-11",21992,897],["2020-06-12",23147,767],["2020-06-13",25431,692],["2020-06-14",21638,355],["2020-06-15",18215,383],["2020-06-16",22858,726],["2020-06-17",24247,778],["2020-06-18",26966,681],["2020-06-19",30812,660],["2020-06-20",32245,611],["2020-06-21",29131,295],["2020-06-22",26827,290],["2020-06-23",33459,728],["2020-06-24",39194,705],["2020-06-25",39700,654],["2020-06-26",44381,608],["2020-06-27",43175,511],["2020-06-28",41753,273],["2020-06-29",39304,337],["2020-06-30",46979,583],["2020-07-01",51181,697],["2020-07-02",53475,699],["2020-07-03",54068,599],["2020-07-04",54982,295],["2020-07-05",45351,216],["2020-07-06",40868,235],["2020-07-07",50965,904],["2020-07-08",62812,821],["2020-07-09",59166,861],["2020-07-10",67107,844],["2020-07-11",62728,755],["2020-07-12",61700,475],["2020-07-13",57159,332],["2020-07-14",58670,744],["2020-07-15",69352,863],["2020-07-16",70521,940],["2020-07-17",76414,938],["2020-07-18",64775,876],["2020-07-19",64233,529],["2020-07-20",56879,376],["2020-07-21",62737,1045],["2020-07-22",69455,1148],["2020-07-23",71399,1069],["2020-07-24",74951,1128],["2020-07-25",65025,1012],["2020-07-26",60689,562],["2020-07-27",54463,1067],["2020-07-28",58451,1109],["2020-07-29",64140,1505],["2020-07-30",69022,1249],["2020-07-31",67876,1322],["2020-08-01",60625,1203],["2020-08-02",53252,496],["2020-08-03",42763,516],["2020-08-04",51140,1242],["2020-08-05",52617,1359],["2020-08-06",54074,1244],["2020-08-07",60834,1321],["2020-08-08",53544,1085],["2020-08-09",50688,620],["2020-08-10",41396,430],["2020-08-11",54924,1323],["2020-08-12",56302,1516],["2020-08-13",51615,1164],["2020-08-14",56771,1226],["2020-08-15",56042,1228],["2020-08-16",42479,620],["2020-08-17",37736,412],["2020-08-18",40042,1179],["2020-08-19",45143,1409],["2020-08-20",43816,1129],["2020-08-21",46533,1114],["2020-08-22",46033,1035],["2020-08-23",37900,577],["2020-08-24",34534,337],["2020-08-25",36900,1137],["2020-08-26",44441,1300],["2020-08-27",44268,1128],["2020-08-28",46105,1021],["2020-08-29",43749,1017],["2020-08-30",38864,477],["2020-08-31",31753,381],["2020-09-01",42204,1016],["2020-09-02",30815,1036],["2020-09-03",44643,1073],["2020-09-04",51618,999],["2020-09-05",44825,924],["2020-09-06",32898,454],["2020-09-07",27984,230],["2020-09-08",22329,348],["2020-09-09",30908,1089],["2020-09-10",37362,1157],["2020-09-11",44822,1017],["2020-09-12",41665,816],["2020-09-13",34561,390],["2020-09-14",33572,406],["2020-09-15",34661,1034],["2020-09-16",40361,1190],["2020-09-17",43713,881],["2020-09-18",46897,900],["2020-09-19",45722,748],["2020-09-20",35449,328],["2020-09-21",39158,276],["2020-09-22",48978,861],["2020-09-23",39631,1159],["2020-09-24",43342,940],["2020-09-25",55217,841],["2020-09-26",47231,871],["2020-09-27",35013,306],["2020-09-28",35374,246],["2020-09-29",36695,726],["2020-09-30",45045,1066],["2020-10-01",45725,865],["2020-10-02",49439,839],["2020-10-03",50806,736],["2020-10-04",38240,382],["2020-10-05",37746,332],["2020-10-06",38791,614],["2020-10-07",51267,929],["2020-10-08",55398,978],["2020-10-09",57164,916],["2020-10-10",57516,691],["2020-10-11",46665,475],["2020-10-12",43167,286],["2020-10-13",46898,718],["2020-10-14",57239,797],["2020-10-15",63821,931],["2020-10-16",68557,892],["2020-10-17",57561,780],["2020-10-18",47893,406],["2020-10-19",57714,449],["2020-10-20",60502,837],["2020-10-21",62948,1050],["2020-10-22",72329,1100],["2020-10-23",82709,945],["2020-10-24",83877,900],["2020-10-25",64374,399],["2020-10-26",63396,397],["2020-10-27",72279,922],["2020-10-28",79769,1052],["2020-10-29",89415,1065],["2020-10-30",98080,930],["2020-10-31",91166,957],["2020-11-01",141951,414],["2020-11-02",83448,478],["2020-11-03",119981,1522],["2020-11-04",106033,1132],["2020-11-05",119325,1152],["2020-11-06",130018,1191],["2020-11-07",132124,1133],["2020-11-08",112335,515],["2020-11-09",118389,579],["2020-11-10",135681,1358],["2020-11-11",149211,1576],["2020-11-12",157968,1110],["2020-11-13",174704,1310],["2020-11-14",167662,1354],["2020-11-15",146897,716],["2020-11-16",150166,612],["2020-11-17",159551,1553],["2020-11-18",168467,1889],["2020-11-19",188084,2014],["2020-11-20",197255,1913],["2020-11-21",186257,1554],["2020-11-22",154000,931],["2020-11-23",154832,859],["2020-11-24",166474,2078],["2020-11-25",188828,2284],["2020-11-26",129904,1396],["2020-11-27",198956,1413],["2020-11-28",151332,1247],["2020-11-29",136931,823],["2020-11-30",150376,1041],["2020-12-01",181086,2494],["2020-12-02",204114,2819],["2020-12-03",216444,2821],["2020-12-04",230276,2558],["2020-12-05",218823,2493],["2020-12-06",182308,1162],["2020-12-07",182000,1299],["2020-12-08",218042,2675],["2020-12-09",216450,3184],["2020-12-10",220993,3132],["2020-12-11",237172,2754],["2020-12-12",226534,2481],["2020-12-13",187410,1514],["2020-12-14",192982,1367],["2020-12-15",193673,2920],["2020-12-16",234097,3457],["2020-12-17",242643,3461],["2020-12-18",242294,2866],["2020-12-19",204217,2718],["2020-12-20",197338,1680],["2020-12-21",179877,1477],["2020-12-22",193159,3136],["2020-12-23",224513,3400],["2020-12-24",206495,2950],["2020-12-25",127176,1562],["2020-12-26",190530,1434],["2020-12-27",152916,1412],["2020-12-28",164561,1502],["2020-12-29",199618,3296],["2020-12-30",229962,3887],["2020-12-31",226029,3302],["2021-01-01",183402,2593],["2021-01-02",279502,2409],["2021-01-03",208527,1466],["2021-01-04",179582,1546],["2021-01-05",219139,3486],["2021-01-06",250733,3911],["2021-01-07",271552,4088],["2021-01-08",295534,3780],["2021-01-09",269146,3538],["2021-01-10",228441,2078],["2021-01-11",195470,1731],["2021-01-12",218185,4070],["2021-01-13",224621,4097],["2021-01-14",225464,3926],["2021-01-15",246452,3678],["2021-01-16",218397,3705],["2021-01-17",186678,2067],["2021-01-18",150613,1406],["2021-01-19",146671,2146],["2021-01-20",189590,4391],["2021-01-21",186383,3895],["2021-01-22",190745,3997],["2021-01-23",177083,3584],["2021-01-24",144091,1953],["2021-01-25",133136,1590],["2021-01-26",146556,3725],["2021-01-27",154410,4079],["2021-01-28",157082,4021],["2021-01-29",167202,3508],["2021-01-30",148698,2984],["2021-01-31",119143,2056],["2021-02-01",120029,1559],["2021-02-02",117704,3473],["2021-02-03",117010,3670],["2021-02-04",124136,5213],["2021-02-05",131330,3497],["2021-02-06",114899,2991],["2021-02-07",95623,1481],["2021-02-08",77422,1315],["2021-02-09",92950,2787],["2021-02-10",95461,3427],["2021-02-11",102333,3868],["2021-02-12",101003,5423],["2021-02-13",90767,3463],["2021-02-14",72130,1374],["2021-02-15",55088,1084],["2021-02-16",55909,1342],["2021-02-17",67143,2326],["2021-02-18",66890,2610],["2021-02-19",74563,2462],["2021-02-20",72333,2143],["2021-02-21",58928,1289],["2021-02-22",52044,1240],["2021-02-23",69263,2236],["2021-02-24",73427,2427],["2021-02-25",75514,3134],["2021-02-26",75086,2136],["2021-02-27",71164,1850],["2021-02-28",54390,1053],["2021-03-01",47720,1236],["2021-03-02",54439,1726],["2021-03-03",66930,2437],["2021-03-04",65398,1742],["2021-03-05",68843,2214],["2021-03-06",60081,1673],["2021-03-07",41935,838],["2021-03-08",94343,823],["2021-03-09",55809,1885],["2021-03-10",58257,1468],["2021-03-11",61709,1528],["2021-03-12",64230,1702],["2021-03-13",49544,1867],["2021-03-14",38123,568],["2021-03-15",56789,746],["2021-03-16",54572,1243],["2021-03-17",58825,1179],["2021-03-18",60339,1554],["2021-03-19",60781,1514],["2021-03-20",54551,771],["2021-03-21",34068,445],["2021-03-22",54529,649],["2021-03-23",56798,892],["2021-03-24",79852,1590],["2021-03-25",69283,1273],["2021-03-26",74648,1262],["2021-03-27",60786,774],["2021-03-28",44563,495],["2021-03-29",70770,679],["2021-03-30",61764,943],["2021-03-31",68199,1136],["2021-04-01",77168,961],["2021-04-02",68674,951],["2021-04-03",64056,756],["2021-04-04",36822,275],["2021-04-05",76262,532],["2021-04-06",62089,912],["2021-04-07",73261,2575],["2021-04-08",80456,1003],["2021-04-09",81548,945],["2021-04-10",64724,702],["2021-04-11",48039,307],["2021-04-12",71564,462],["2021-04-13",77607,983],["2021-04-14",75668,938],["2021-04-15",73715,895],["2021-04-16",78374,937],["2021-04-17",53894,673],["2021-04-18",41531,360],["2021-04-19",69739,485],["2021-04-20",61205,835],["2021-04-21",62537,845],["2021-04-22",66227,911],["2021-04-23",63753,872],["2021-04-24",50649,724],["2021-04-25",33577,285],["2021-04-26",46962,472],["2021-04-27",51981,718],["2021-04-28",54768,931],["2021-04-29",57699,874],["2021-04-30",58318,860],["2021-05-01",44988,715],["2021-05-02",29560,319],["2021-05-03",49783,460],["2021-05-04",41034,909],["2021-05-05",44620,775],["2021-05-06",47764,832],["2021-05-07",47401,812],["2021-05-08",33782,599],["2021-05-09",22271,248],["2021-05-10",36440,366],["2021-05-11",34055,689],["2021-05-12",35512,850],["2021-05-13",38422,781],["2021-05-14",41029,730],["2021-05-15",28968,559],["2021-05-16",16738,292],["2021-05-17",29109,374],["2021-05-18",27896,863],["2021-05-19",28127,677],["2021-05-20",29640,655],["2021-05-21",28977,694],["2021-05-22",18297,475],["2021-05-23",14124,192],["2021-05-24",25627,417],["2021-05-25",22805,700],["2021-05-26",23390,967],["2021-05-27",27777,1342],["2021-05-28",22012,760],["2021-05-29",11535,340],["2021-05-30",6352,132],["2021-05-31",6707,153],["2021-06-01",22389,507],["2021-06-02",16917,591],["2021-06-03",19468,615],["2021-06-04",-24027,134],["2021-06-05",10462,373],["2021-06-06",6147,253],["2021-06-07",19389,336],["2021-06-08",14225,377],["2021-06-09",20632,573],["2021-06-10",15805,460],["2021-06-11",16795,513],["2021-06-12",8299,170],["2021-06-13",6788,97],["2021-06-14",15068,210],["2021-06-15",11864,454],["2021-06-16",14460,424],["2021-06-17",12202,290],["2021-06-18",12627,470],["2021-06-19",7613,167],["2021-06-20",4072,91],["2021-06-21",15805,289],["2021-06-22",12804,425],["2021-06-23",13999,396],["2021-06-24",14726,357],["2021-06-25",14956,458],["2021-06-26",6827,125],["2021-06-27",4098,97],["2021-06-28",15499,161],["2021-06-29",15773,380],["2021-06-30",15956,322],["2021-07-01",65020,247],["2021-07-02",14955,266],["2021-07-03",4035,88],["2021-07-04",2944,37],["2021-07-05",10030,41],["2021-07-06",27105,318],["2021-07-07",30101,323],["2021-07-08",49316,368],["2021-07-09",35307,409],["2021-07-10",7834,93],["2021-07-11",5536,32],["2021-07-12",35247,273],["2021-07-13",43187,432],["2021-07-14",37910,392],["2021-07-15",36150,341],["2021-07-16",52229,358],["2021-07-17",12607,84],["2021-07-18",9102,39],["2021-07-19",58835,232],["2021-07-20",62338,304],["2021-07-21",59565,401],["2021-07-22",65704,366],["2021-07-23",83032,442],["2021-07-24",21739,102],["2021-07-25",13950,51],["2021-07-26",92547,274],["2021-07-27",107177,487],["2021-07-28",84719,497],["2021-07-29",98571,404],["2021-07-30",122551,542],["2021-07-31",29984,144],["2021-08-01",23082,66],["2021-08-02",135437,461],["2021-08-03",150355,671],["2021-08-04",112477,730],["2021-08-05",126943,573],["2021-08-06",168702,854],["2021-08-07",42412,207],["2021-08-08",36245,133],["2021-08-09",177668,721],["2021-08-10",162214,1053],["2021-08-11",155771,339],["2021-08-12",138597,1023],["2021-08-13",187872,1092],["2021-08-14",50162,244],["2021-08-15",44079,181],["2021-08-16",258236,1022],["2021-08-17",144773,994],["2021-08-18",164826,1123],["2021-08-19",159343,1733],["2021-08-20",199999,1539],["2021-08-21",79620,473],["2021-08-22",40768,190],["2021-08-23",265094,1369],["2021-08-24",150319,1404],["2021-08-25",171192,1451],["2021-08-26",187613,2219],["2021-08-27",196421,1777],["2021-08-28",85471,566],["2021-08-29",42404,282],["2021-08-30",279173,1734],["2021-08-31",160430,1438],["2021-09-01",211101,1929],["2021-09-02",175619,2945],["2021-09-03",192091,1985],["2021-09-04",66477,530],["2021-09-05",44596,382],["2021-09-06",77509,524],["2021-09-07",299186,2240],["2021-09-08",184318,2208],["2021-09-09",170620,3234],["2021-09-10",177092,2422],["2021-09-11",74219,699],["2021-09-12",39744,304],["2021-09-13",283701,1739],["2021-09-14",152939,2660],["2021-09-15",170396,2583],["2021-09-16",154764,3437],["2021-09-17",167434,2586],["2021-09-18",68697,829],["2021-09-19",40468,306],["2021-09-20",206168,2261],["2021-09-21",130324,2366],["2021-09-22",93919,2801],["2021-09-23",182203,3153],["2021-09-24",139651,2724],["2021-09-25",52655,635],["2021-09-26",35802,311],["2021-09-27",190910,2369],["2021-09-28",113596,2312],["2021-09-29",129004,2519],["2021-09-30",116068,2744],["2021-10-01",126075,2455],["2021-10-02",44785,638],["2021-10-03",26226,256],["2021-10-04",170820,2044],["2021-10-05",98795,2034],["2021-10-06",125982,2533],["2021-10-07",105434,2454],["2021-10-08",113353,2437],["2021-10-09",38101,525],["2021-10-10",23863,492],["2021-10-11",121184,1165],["2021-10-12",112099,2516],["2021-10-13",106540,2253],["2021-10-14",88954,2051],["2021-10-15",98549,2164],["2021-10-16",34284,388],["2021-10-17",23032,188],["2021-10-18",121855,1886],["2021-10-19",81795,2079],["2021-10-20",86890,2999],["2021-10-21",81848,1885],["2021-10-22",87091,2136],["2021-10-23",30574,438],["2021-10-24",17406,153],["2021-10-25",104239,1416],["2021-10-26",87416,1728],["2021-10-27",94903,2019],["2021-10-28",86174,1782],["2021-10-29",88735,2014],["2021-10-30",29838,327],["2021-10-31",19179,159],["2021-11-01",123267,1152],["2021-11-02",77289,1514],["2021-11-03",84854,1885],["2021-11-04",83236,1121],["2021-11-05",91789,2329],["2021-11-06",32263,388],["2021-11-07",22324,134],["2021-11-08",125130,1172],["2021-11-09",83329,1691],["2021-11-10",99003,1632],["2021-11-11",65224,725],["2021-11-12",128768,2070],["2021-11-13",61813,452],["2021-11-14",24305,149],["2021-11-15",147631,1191],["2021-11-16",90857,1442],["2021-11-17",114393,1620],["2021-11-18",110339,3222],["2021-11-19",119587,1993],["2021-11-20",41237,322],["2021-11-21",31478,126],["2021-11-22",158085,1234],["2021-11-23",93128,1474],["2021-11-24",120372,1634],["2021-11-25",31014,375],["2021-11-26",51007,543],["2021-11-27",24954,192],["2021-11-28",24056,124],["2021-11-29",215531,1875],["2021-11-30",109832,1555],["2021-12-01",139401,1969],["2021-12-02",138902,1355],["2021-12-03",153568,2152],["2021-12-04",57961,493],["2021-12-05",34680,164],["2021-12-06",196374,1347],["2021-12-07",114656,1769],["2021-12-08",149130,1875],["2021-12-09",123760,1298],["2021-12-10",165300,2104],["2021-12-11",51471,416],["2021-12-12",36414,196],["2021-12-13",202688,1289],["2021-12-14",116628,1734],["2021-12-15",145311,2097],["2021-12-16",146802,1164],["2021-12-17",173834,2042],["2021-12-18",74759,475],["2021-12-19",72627,163],["2021-12-20",299990,1419],["2021-12-21",189954,2088],["2021-12-22",244098,2057],["2021-12-23",272809,3286],["2021-12-24",184034,1003],["2021-12-25",58404,100],["2021-12-26",189805,81],["2021-12-27",535815,1743],["2021-12-28",380733,2498],["2021-12-29",489474,2101],["2021-12-30",585863,1415],["2021-12-31",446844,1197],["2022-01-01",161960,273],["2022-01-02",286868,233],["2022-01-03",1018686,1651],["2022-01-04",884796,2364],["2022-01-05",707134,2129],["2022-01-06",760542,1973],["2022-01-07",901912,2688],["2022-01-08",447054,691],["2022-01-09",316109,402],["2022-01-10",1427763,1686],["2022-01-11",772241,2682],["2022-01-12",878920,2727],["2022-01-13",871941,2288],["2022-01-14",932773,2995],["2022-01-15",425291,1002],["2022-01-16",339145,414],["2022-01-17",713331,776],["2022-01-18",1177726,2988],["2022-01-19",845037,3317],["2022-01-20",751358,2676],["2022-01-21",822744,3868],["2022-01-22",338877,937],["2022-01-23",200549,571],["2022-01-24",1028197,2163],["2022-01-25",513668,2978],["2022-01-26",681763,3890],["2022-01-27",533066,3094],["2022-01-28",551758,3878],["2022-01-29",243622,1307],["2022-01-30",104696,364],["2022-01-31",659731,2579],["2022-02-01",298314,3584],["2022-02-02",323144,3626],["2022-02-03",313904,3030],["2022-02-04",311240,3978],["2022-02-05",124584,869],["2022-02-06",59040,380],["2022-02-07",345413,2741],["2022-02-08",196420,3364],["2022-02-09",224914,3553],["2022-02-10",174234,3261],["2022-02-11",169141,2810],["2022-02-12",64467,762],["2022-02-13",34805,475],["2022-02-14",205260,2591],["2022-02-15",116048,2853],["2022-02-16",140116,3280],["2022-02-17",104387,3189],["2022-02-18",109313,2493],["2022-02-19",46564,694],["2022-02-20",26373,414],["2022-02-21",56018,761],["2022-02-22",123050,2728],["2022-02-23",83194,3004],["2022-02-24",73866,2910],["2022-02-25",85599,2814],["2022-02-26",25453,566],["2022-02-27",9206,197],["2022-02-28",107118,1973],["2022-03-01",43912,1933],["2022-03-02",57920,2322],["2022-03-03",52033,1883],["2022-03-04",49144,1892],["2022-03-05",16716,308],["2022-03-06",6879,212],["2022-03-07",62762,1686],["2022-03-08",35163,1575],["2022-03-09",46589,1804],["2022-03-10",38436,1559],["2022-03-11",43966,1684],["2022-03-12",11088,472],["2022-03-13",6467,143],["2022-03-14",48770,-2434],["2022-03-15",48622,1523],["2022-03-16",39158,2032],["2022-03-17",36266,1211],["2022-03-18",36136,1045],["2022-03-19",12234,332],["2022-03-20",7927,83],["2022-03-21",46026,927],["2022-03-22",25977,1030],["2022-03-23",46746,1335],["2022-03-24",38057,982],["2022-03-25",33403,832],["2022-03-26",12199,164],["2022-03-27",7591,51],["2022-03-28",42320,910],["2022-03-29",25900,757],["2022-03-30",44945,1202],["2022-03-31",37964,875],["2022-04-01",32211,646],["2022-04-02",11564,138],["2022-04-03",5011,39],["2022-04-04",41171,625],["2022-04-05",31138,464],["2022-04-06",48657,1119],["2022-04-07",35882,708],["2022-04-08",44311,543],["2022-04-09",13692,273],["2022-04-10",8262,27],["2022-04-11",50124,435],["2022-04-12",29286,591],["2022-04-13",52842,990],["2022-04-14",57675,617],["2022-04-15",47945,724],["2022-04-16",11108,40],["2022-04-17",11354,17],["2022-04-18",60224,318],["2022-04-19",50320,454],["2022-04-20",61628,598],["2022-04-21",59473,484],["2022-04-22",68300,490],["2022-04-23",19072,100],["2022-04-24",12503,28],["2022-04-25",74828,353],["2022-04-26",54938,306],["2022-04-27",83236,668],["2022-04-28",73772,463],["2022-04-29",82061,419],["2022-04-30",22478,90],["2022-05-01",15505,23],["2022-05-02",95953,392],["2022-05-03",69685,664],["2022-05-04",100727,1934],["2022-05-05",93665,694],["2022-05-06",95396,455],["2022-05-07",30433,96],["2022-05-08",11868,19],["2022-05-09",112976,330],["2022-05-10",94000,304],["2022-05-11",160186,551],["2022-05-12",115679,373],["2022-05-13",114730,427],["2022-05-14",25230,46],["2022-05-15",19544,27],["2022-05-16",150064,321],["2022-05-17",134395,354],["2022-05-18",167264,563],["2022-05-19",121404,406],["2022-05-20",140273,398],["2022-05-21",37524,115],["2022-05-22",22132,51],["2022-05-23",133120,249],["2022-05-24",132875,549],["2022-05-25",185355,804],["2022-05-26",125006,343],["2022-05-27",139222,602],["2022-05-28",13980,35],["2022-05-29",9166,8],["2022-05-30",32343,22],["2022-05-31",182679,382],["2022-06-01",217463,592],["2022-06-02",111727,372],["2022-06-03",142560,408],["2022-06-04",43886,194],["2022-06-05",16618,18],["2022-06-06",137305,321],["2022-06-07",143248,471],["2022-06-08",176690,1045],["2022-06-09",117981,345],["2022-06-10",136331,371],["2022-06-11",35552,124],["2022-06-12",18586,19],["2022-06-13",125716,271],["2022-06-14",135733,439],["2022-06-15",170052,654],["2022-06-16",104545,335],["2022-06-17",116882,304],["2022-06-18",14976,25],["2022-06-19",14767,22],["2022-06-20",54255,89],["2022-06-21",210300,573],["2022-06-22",168345,774],["2022-06-23",116881,499],["2022-06-24",156084,494],["2022-06-25",47904,163],["2022-06-26",18418,6],["2022-06-27",132611,280],["2022-06-28",122729,541],["2022-06-29",193305,693],["2022-06-30",124090,453],["2022-07-01",152662,523],["2022-07-02",12517,21],["2022-07-03",7124,3],["2022-07-04",35844,64],["2022-07-05",181106,426],["2022-07-06",237750,717],["2022-07-07",125113,477],["2022-07-08",168473,562],["2022-07-09",23770,36],["2022-07-10",22772,8],["2022-07-11",175681,551],["2022-07-12",184744,523],["2022-07-13",188464,857],["2022-07-14",144624,458],["2022-07-15",170281,533],["2022-07-16",21260,42],["2022-07-17",22128,11],["2022-07-18",170746,520],["2022-07-19",161308,547],["2022-07-20",202103,792],["2022-07-21",153891,552],["2022-07-22",166125,580],["2022-07-23",24435,56],["2022-07-24",21769,14],["2022-07-25",167928,512],["2022-07-26",164814,519],["2022-07-27",224568,824],["2022-07-28",149447,484],["2022-07-29",139706,618],["2022-07-30",12125,22],["2022-07-31",10968,9],["2022-08-01",176993,606],["2022-08-02",108567,445],["2022-08-03",214560,1057],["2022-08-04",164965,673],["2022-08-05",132224,658],["2022-08-06",10943,28],["2022-08-07",10160,11],["2022-08-08",145743,563],["2022-08-09",129004,562],["2022-08-10",172821,852],["2022-08-11",137291,701],["2022-08-12",121963,671],["2022-08-13",6970,18],["2022-08-14",10773,12],["2022-08-15",129572,555],["2022-08-16",120959,472],["2022-08-17",158251,960],["2022-08-18",126768,608],["2022-08-19",108824,531],["2022-08-20",8019,27],["2022-08-21",8620,8],["2022-08-22",120825,593],["2022-08-23",105499,505],["2022-08-24",172098,919],["2022-08-25",111393,644],["2022-08-26",102644,637],["2022-08-27",8930,30],["2022-08-28",8621,3],["2022-08-29",112418,591],["2022-08-30",117319,467],["2022-08-31",152946,1403],["2022-09-01",108825,713],["2022-09-02",88502,502],["2022-09-03",7526,19],["2022-09-04",5892,1],["2022-09-05",18537,53],["2022-09-06",125989,628],["2022-09-07",144151,829],["2022-09-08",88425,674],["2022-09-09",73885,533],["2022-09-10",3227,26],["2022-09-11",11464,19],["2022-09-12",87513,569],["2022-09-13",61642,522],["2022-09-14",115724,985],["2022-09-15",94168,756]];
+
+  // ─── PARSE & SMOOTH DATA ───
+  const raw = RAW_DATA.map(d => {
+    const parts = d[0].split('-');
+    return { date: d[0], year: +parts[0], month: +parts[1], day: +parts[2], cases: Math.max(0, d[1]), deaths: Math.max(0, d[2]) };
+  }).filter(d => d.cases >= 0);
+
+  // 7-day rolling average
+  const smoothed = raw.map((d, i) => {
+    const start = Math.max(0, i - 6);
+    const win = raw.slice(start, i + 1);
+    const avgC = win.reduce((s, w) => s + w.cases, 0) / win.length;
+    const avgD = win.reduce((s, w) => s + w.deaths, 0) / win.length;
+    return { ...d, avgCases: avgC, avgDeaths: avgD };
+  });
+
+  // Group by year, compute day-of-year index
+  const years = [2020, 2021, 2022];
+  const yearData = {};
+  years.forEach(y => {
+    yearData[y] = smoothed.filter(d => d.year === y).map((d, i) => ({
+      ...d,
+      dayIndex: i
+    }));
+  });
+
+  const maxCases = Math.max(...smoothed.map(d => d.avgCases));
+  const maxDeaths = Math.max(...smoothed.map(d => d.avgDeaths));
+  const maxDays = Math.max(...years.map(y => yearData[y].length));
+
+  // ─── THREE.JS SCENE SETUP ───
+  const container = document.getElementById('final-chart');
+  const W = container.clientWidth;
+  const H = container.clientHeight;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xfafaf8);
+  scene.fog = new THREE.FogExp2(0xfafaf8, 0.008);
+
+  const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 500);
+  camera.position.set(55, 40, 55);
+  camera.lookAt(0, 5, 0);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  container.appendChild(renderer.domElement);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.minDistance = 20;
+  controls.maxDistance = 120;
+  controls.maxPolarAngle = Math.PI / 2.1;
+  controls.target.set(0, 5, 0);
+
+  // ─── LIGHTING ───
+  const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambient);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(30, 50, 20);
+  dirLight.castShadow = true;
+  dirLight.shadow.mapSize.width = 1024;
+  dirLight.shadow.mapSize.height = 1024;
+  scene.add(dirLight);
+
+  const fillLight = new THREE.DirectionalLight(0x8899bb, 0.3);
+  fillLight.position.set(-20, 30, -10);
+  scene.add(fillLight);
+
+  // ─── COLOR HELPERS ───
+  function cfrColor(cases, deaths) {
+    if (cases < 100) return new THREE.Color(0x2b6ca3);
+    const cfr = Math.min(deaths / cases, 0.06);
+    const t = cfr / 0.06;
+    if (t < 0.33) return new THREE.Color(0x2b6ca3).lerp(new THREE.Color(0xe8d44d), t / 0.33);
+    if (t < 0.66) return new THREE.Color(0xe8d44d).lerp(new THREE.Color(0xc23728), (t - 0.33) / 0.33);
+    return new THREE.Color(0xc23728).lerp(new THREE.Color(0x5a0d14), (t - 0.66) / 0.34);
+  }
+
+  // ─── TERRAIN DIMENSIONS ───
+  const terrainW = 60;
+  const terrainD = 30;
+  const heightScale = 30;
+  const yearSpacing = terrainD / (years.length - 1);
+
+  // ─── BUILD TERRAIN RIBBONS PER YEAR ───
+  years.forEach((year, yi) => {
+    const yd = yearData[year];
+    if (yd.length < 2) return;
+
+    const segCount = yd.length - 1;
+    const ribbonWidth = 3.5;
+    const zCenter = -terrainD / 2 + yi * yearSpacing;
+
+    const positions = [];
+    const colors = [];
+    const indices = [];
+
+    yd.forEach((d, i) => {
+      const xPos = -terrainW / 2 + (i / (maxDays - 1)) * terrainW;
+      const h = Math.sqrt(d.avgCases / maxCases) * heightScale;
+      const col = cfrColor(d.avgCases, d.avgDeaths);
+
+      // Front edge (lower)
+      positions.push(xPos, 0, zCenter + ribbonWidth / 2);
+      colors.push(col.r * 0.4, col.g * 0.4, col.b * 0.4);
+
+      // Top edge
+      positions.push(xPos, h, zCenter);
+      colors.push(col.r, col.g, col.b);
+
+      // Back edge (lower)
+      positions.push(xPos, 0, zCenter - ribbonWidth / 2);
+      colors.push(col.r * 0.4, col.g * 0.4, col.b * 0.4);
+
+      if (i < yd.length - 1) {
+        const base = i * 3;
+        // Front face
+        indices.push(base, base + 3, base + 1);
+        indices.push(base + 3, base + 4, base + 1);
+        // Back face
+        indices.push(base + 1, base + 4, base + 2);
+        indices.push(base + 4, base + 5, base + 2);
+      }
+    });
+
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geom.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    geom.setIndex(indices);
+    geom.computeVertexNormals();
+
+    const mat = new THREE.MeshLambertMaterial({
+      vertexColors: true,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.92
+    });
+
+    const mesh = new THREE.Mesh(geom, mat);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    scene.add(mesh);
+
+    // Ridge line on top
+    const ridgePoints = yd.map((d, i) => {
+      const xPos = -terrainW / 2 + (i / (maxDays - 1)) * terrainW;
+      const h = Math.sqrt(d.avgCases / maxCases) * heightScale;
+      return new THREE.Vector3(xPos, h + 0.05, zCenter);
+    });
+    const ridgeCurve = new THREE.BufferGeometry().setFromPoints(ridgePoints);
+    const ridgeMat = new THREE.LineBasicMaterial({ color: 0x1a1a1a, linewidth: 1 });
+    scene.add(new THREE.Line(ridgeCurve, ridgeMat));
+  });
+
+  // ─── GROUND PLANE ───
+  const groundGeom = new THREE.PlaneGeometry(terrainW + 20, terrainD + 20);
+  const groundMat = new THREE.MeshLambertMaterial({ color: 0xf0ede8, side: THREE.DoubleSide });
+  const ground = new THREE.Mesh(groundGeom, groundMat);
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -0.1;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  // ─── GRID LINES ───
+  const gridMat = new THREE.LineBasicMaterial({ color: 0xd0cdc8, transparent: true, opacity: 0.5 });
+
+  // Month gridlines along X
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  months.forEach((m, mi) => {
+    const dayApprox = mi * 30.4;
+    const xPos = -terrainW / 2 + (dayApprox / (maxDays - 1)) * terrainW;
+    if (xPos > terrainW / 2) return;
+    const pts = [
+      new THREE.Vector3(xPos, 0, -terrainD / 2 - 2),
+      new THREE.Vector3(xPos, 0, terrainD / 2 + 2)
+    ];
+    scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), gridMat));
+  });
+
+  // ─── HTML LABELS (CSS2D-style, positioned via 3D projection) ───
+  const labelContainer = document.createElement('div');
+  labelContainer.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;';
+  container.appendChild(labelContainer);
+
+  const labels = [];
+
+  function addLabel(text, pos3d, style) {
+    const el = document.createElement('div');
+    el.textContent = text;
+    el.style.cssText = 'position:absolute;font-family:JetBrains Mono,monospace;white-space:nowrap;' + (style || 'font-size:11px;color:#6b6b6b;');
+    labelContainer.appendChild(el);
+    labels.push({ el, pos: pos3d });
+  }
+
+  // Year labels
+  years.forEach((year, yi) => {
+    const zCenter = -terrainD / 2 + yi * yearSpacing;
+    addLabel(String(year), new THREE.Vector3(terrainW / 2 + 4, 0, zCenter), 'font-size:14px;color:#1a1a1a;font-weight:600;');
+  });
+
+  // Month labels
+  months.forEach((m, mi) => {
+    const dayApprox = mi * 30.4;
+    const xPos = -terrainW / 2 + (dayApprox / (maxDays - 1)) * terrainW;
+    if (xPos > terrainW / 2) return;
+    addLabel(m, new THREE.Vector3(xPos, 0, terrainD / 2 + 4), 'font-size:9px;color:#999;');
+  });
+
+  // Height reference labels
+  [100000, 500000, 1000000].forEach(val => {
+    const h = Math.sqrt(val / maxCases) * heightScale;
+    const label = val >= 1e6 ? (val / 1e6) + 'M' : (val / 1e3) + 'K';
+    addLabel(label, new THREE.Vector3(-terrainW / 2 - 4, h, terrainD / 2 + 2), 'font-size:9px;color:#aaa;');
+  });
+
+  // Wave annotation markers
+  const waveAnnotations = [
+    { label: 'First wave', dayApprox: 85, year: 2020 },
+    { label: 'Winter surge', dayApprox: 340, year: 2020 },
+    { label: 'Delta', dayApprox: 230, year: 2021 },
+    { label: 'Omicron peak', dayApprox: 10, year: 2022 },
+  ];
+
+  waveAnnotations.forEach(a => {
+    const yi = years.indexOf(a.year);
+    const zCenter = -terrainD / 2 + yi * yearSpacing;
+    const xPos = -terrainW / 2 + (a.dayApprox / (maxDays - 1)) * terrainW;
+    const yd = yearData[a.year];
+    const nearest = yd.reduce((best, d) => Math.abs(d.dayIndex - a.dayApprox) < Math.abs(best.dayIndex - a.dayApprox) ? d : best);
+    const h = Math.sqrt(nearest.avgCases / maxCases) * heightScale;
+
+    // Vertical marker line
+    const markerPts = [
+      new THREE.Vector3(xPos, h, zCenter),
+      new THREE.Vector3(xPos, h + 5, zCenter)
+    ];
+    const markerMat = new THREE.LineBasicMaterial({ color: 0xc23728 });
+    scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(markerPts), markerMat));
+
+    // Dot at peak
+    const dotGeom = new THREE.SphereGeometry(0.4, 8, 8);
+    const dotMat = new THREE.MeshBasicMaterial({ color: 0xc23728 });
+    const dot = new THREE.Mesh(dotGeom, dotMat);
+    dot.position.set(xPos, h, zCenter);
+    scene.add(dot);
+
+    addLabel(a.label, new THREE.Vector3(xPos, h + 6, zCenter), 'font-size:10px;color:#c23728;font-weight:600;');
+  });
+
+  // ─── UPDATE LABEL POSITIONS ───
+  function updateLabels() {
+    const halfW = W / 2;
+    const halfH = H / 2;
+    labels.forEach(({ el, pos }) => {
+      const projected = pos.clone().project(camera);
+      const px = (projected.x * halfW) + halfW;
+      const py = -(projected.y * halfH) + halfH;
+      if (projected.z > 1) {
+        el.style.display = 'none';
+      } else {
+        el.style.display = '';
+        el.style.left = px + 'px';
+        el.style.top = py + 'px';
+        el.style.transform = 'translate(-50%, -50%)';
+      }
+    });
+  }
+
+  // ─── ANIMATION LOOP ───
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    updateLabels();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // ─── RESIZE HANDLER ───
+  window.addEventListener('resize', () => {
+    const newW = container.clientWidth;
+    const newH = container.clientHeight;
+    camera.aspect = newW / newH;
+    camera.updateProjectionMatrix();
+    renderer.setSize(newW, newH);
+  });
+</script>
+</body>
+</html>

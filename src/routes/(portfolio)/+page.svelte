@@ -28,7 +28,7 @@
         to designing backend systems.
       </p>
       <p>
-        When I'm not coding, you'll find me exploring new technologies, reading,
+        When I'm not coding, you'll find me running, reading,
         or working on side projects. Take a look around to see what I've been
         working on.
       </p>

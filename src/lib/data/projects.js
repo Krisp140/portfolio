@@ -1,5 +1,14 @@
 export const projects = [
   {
+    title: 'COVID-19 Visualization Redesign',
+    description:
+      'A critique and redesign of the NYT spiral COVID-19 chart. Features an interactive 3D terrain visualization built with Three.js mapping case volume and fatality rate.',
+    image: '/A3/nyt.png',
+    tags: ['Data Visualization', 'Three.js', 'D3', '3D'],
+    link: '/A3/',
+    featured: true
+  },
+  {
     title: 'Boston Housing EDA',
     description:
       'An exploratory data analysis of the Boston Housing dataset. Interactive Plotly charts examine correlations between socioeconomic factors and median home values.',
@@ -15,7 +24,7 @@ export const projects = [
     image: 'https://placehold.co/600x340/0a0a0a/f5f2ed?text=Portfolio',
     tags: ['HTML', 'CSS'],
     link: null,
-    featured: true
+    featured: false
   },
   {
     title: 'Task Tracker',
