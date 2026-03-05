@@ -1,0 +1,963 @@
+{
+  "viz1_dumbbell": [
+    {
+      "state": "Missouri",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 99,
+      "pct_women_no_clinic": 94,
+      "num_clinics": 1,
+      "rate_occurrence": 0.1,
+      "rate_residence": 9.9,
+      "num_occurrence": 170,
+      "num_residence": 11710,
+      "gap": 9.8
+    },
+    {
+      "state": "South Carolina",
+      "pct_counties_no_clinic": 93,
+      "pct_travel_out": 57,
+      "pct_women_no_clinic": 71,
+      "num_clinics": 3,
+      "rate_occurrence": 5.3,
+      "rate_residence": 11.9,
+      "num_occurrence": 5300,
+      "num_residence": 11830,
+      "gap": 6.6000000000000005
+    },
+    {
+      "state": "Delaware",
+      "pct_counties_no_clinic": 33,
+      "pct_travel_out": 44,
+      "pct_women_no_clinic": 19,
+      "num_clinics": 3,
+      "rate_occurrence": 10,
+      "rate_residence": 15.8,
+      "num_occurrence": 1830,
+      "num_residence": 2870,
+      "gap": 5.800000000000001
+    },
+    {
+      "state": "Wyoming",
+      "pct_counties_no_clinic": 96,
+      "pct_travel_out": 88,
+      "pct_women_no_clinic": 96,
+      "num_clinics": 2,
+      "rate_occurrence": 0.9,
+      "rate_residence": 6.4,
+      "num_occurrence": 100,
+      "num_residence": 700,
+      "gap": 5.5
+    },
+    {
+      "state": "Mississippi",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 44,
+      "pct_women_no_clinic": 92,
+      "num_clinics": 1,
+      "rate_occurrence": 6.1,
+      "rate_residence": 9.9,
+      "num_occurrence": 3560,
+      "num_residence": 5760,
+      "gap": 3.8000000000000007
+    },
+    {
+      "state": "Alabama",
+      "pct_counties_no_clinic": 93,
+      "pct_travel_out": 47,
+      "pct_women_no_clinic": 59,
+      "num_clinics": 5,
+      "rate_occurrence": 6,
+      "rate_residence": 9.5,
+      "num_occurrence": 5700,
+      "num_residence": 9060,
+      "gap": 3.5
+    },
+    {
+      "state": "South Dakota",
+      "pct_counties_no_clinic": 98,
+      "pct_travel_out": 84,
+      "pct_women_no_clinic": 76,
+      "num_clinics": 1,
+      "rate_occurrence": 0.8,
+      "rate_residence": 4.1,
+      "num_occurrence": 130,
+      "num_residence": 680,
+      "gap": 3.3
+    },
+    {
+      "state": "Virginia",
+      "pct_counties_no_clinic": 92,
+      "pct_travel_out": 25,
+      "pct_women_no_clinic": 79,
+      "num_clinics": 17,
+      "rate_occurrence": 11,
+      "rate_residence": 13.8,
+      "num_occurrence": 18740,
+      "num_residence": 23390,
+      "gap": 2.8000000000000007
+    },
+    {
+      "state": "West Virginia",
+      "pct_counties_no_clinic": 98,
+      "pct_travel_out": 52,
+      "pct_women_no_clinic": 90,
+      "num_clinics": 1,
+      "rate_occurrence": 3.1,
+      "rate_residence": 5.7,
+      "num_occurrence": 990,
+      "num_residence": 1780,
+      "gap": 2.6
+    },
+    {
+      "state": "Arkansas",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 37,
+      "pct_women_no_clinic": 86,
+      "num_clinics": 2,
+      "rate_occurrence": 5.6,
+      "rate_residence": 7.8,
+      "num_occurrence": 3250,
+      "num_residence": 4510,
+      "gap": 2.2
+    },
+    {
+      "state": "Indiana",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 31,
+      "pct_women_no_clinic": 66,
+      "num_clinics": 7,
+      "rate_occurrence": 6,
+      "rate_residence": 8.2,
+      "num_occurrence": 7880,
+      "num_residence": 10810,
+      "gap": 2.1999999999999993
+    },
+    {
+      "state": "Kentucky",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 39,
+      "pct_women_no_clinic": 82,
+      "num_clinics": 2,
+      "rate_occurrence": 4.8,
+      "rate_residence": 6.7,
+      "num_occurrence": 4080,
+      "num_residence": 5690,
+      "gap": 1.9000000000000004
+    },
+    {
+      "state": "Idaho",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 26,
+      "pct_women_no_clinic": 67,
+      "num_clinics": 3,
+      "rate_occurrence": 4.8,
+      "rate_residence": 6,
+      "num_occurrence": 1690,
+      "num_residence": 2130,
+      "gap": 1.2000000000000002
+    },
+    {
+      "state": "Louisiana",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 21,
+      "pct_women_no_clinic": 75,
+      "num_clinics": 3,
+      "rate_occurrence": 8,
+      "rate_residence": 8.4,
+      "num_occurrence": 7360,
+      "num_residence": 7760,
+      "gap": 0.40000000000000036
+    },
+    {
+      "state": "New Hampshire",
+      "pct_counties_no_clinic": 60,
+      "pct_travel_out": 23,
+      "pct_women_no_clinic": 30,
+      "num_clinics": 4,
+      "rate_occurrence": 8.3,
+      "rate_residence": 8.7,
+      "num_occurrence": 2050,
+      "num_residence": 2150,
+      "gap": 0.3999999999999986
+    },
+    {
+      "state": "Tennessee",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 23,
+      "pct_women_no_clinic": 61,
+      "num_clinics": 7,
+      "rate_occurrence": 8.1,
+      "rate_residence": 7.8,
+      "num_occurrence": 10850,
+      "num_residence": 10450,
+      "gap": -0.2999999999999998
+    },
+    {
+      "state": "District of Columbia",
+      "pct_counties_no_clinic": 0,
+      "pct_travel_out": 45,
+      "pct_women_no_clinic": 0,
+      "num_clinics": 5,
+      "rate_occurrence": 48.9,
+      "rate_residence": 26.1,
+      "num_occurrence": 9410,
+      "num_residence": 5010,
+      "gap": -22.799999999999997
+    }
+  ],
+  "viz2_bar": {
+    "high_access": {
+      "states": [
+        {
+          "state": "California",
+          "rate_residence": 19,
+          "pct_counties_no_clinic": 38
+        },
+        {
+          "state": "Connecticut",
+          "rate_residence": 17.1,
+          "pct_counties_no_clinic": 0
+        },
+        {
+          "state": "Delaware",
+          "rate_residence": 15.8,
+          "pct_counties_no_clinic": 33
+        },
+        {
+          "state": "Hawaii",
+          "rate_residence": 12.1,
+          "pct_counties_no_clinic": 40
+        },
+        {
+          "state": "Maine",
+          "rate_residence": 10.1,
+          "pct_counties_no_clinic": 12
+        },
+        {
+          "state": "Massachusetts",
+          "rate_residence": 12.5,
+          "pct_counties_no_clinic": 50
+        },
+        {
+          "state": "New Jersey",
+          "rate_residence": 28.9,
+          "pct_counties_no_clinic": 29
+        },
+        {
+          "state": "New York",
+          "rate_residence": 27.6,
+          "pct_counties_no_clinic": 37
+        }
+      ],
+      "avg": 17.9
+    },
+    "low_access": {
+      "states": [
+        {
+          "state": "Alabama",
+          "rate_residence": 9.5,
+          "pct_counties_no_clinic": 93
+        },
+        {
+          "state": "Arkansas",
+          "rate_residence": 7.8,
+          "pct_counties_no_clinic": 99
+        },
+        {
+          "state": "Georgia",
+          "rate_residence": 16.6,
+          "pct_counties_no_clinic": 95
+        },
+        {
+          "state": "Idaho",
+          "rate_residence": 6,
+          "pct_counties_no_clinic": 95
+        },
+        {
+          "state": "Indiana",
+          "rate_residence": 8.2,
+          "pct_counties_no_clinic": 95
+        },
+        {
+          "state": "Iowa",
+          "rate_residence": 5.9,
+          "pct_counties_no_clinic": 95
+        },
+        {
+          "state": "Kansas",
+          "rate_residence": 7.3,
+          "pct_counties_no_clinic": 98
+        },
+        {
+          "state": "Kentucky",
+          "rate_residence": 6.7,
+          "pct_counties_no_clinic": 99
+        },
+        {
+          "state": "Louisiana",
+          "rate_residence": 8.4,
+          "pct_counties_no_clinic": 95
+        },
+        {
+          "state": "Minnesota",
+          "rate_residence": 9.5,
+          "pct_counties_no_clinic": 95
+        },
+        {
+          "state": "Mississippi",
+          "rate_residence": 9.9,
+          "pct_counties_no_clinic": 99
+        },
+        {
+          "state": "Missouri",
+          "rate_residence": 9.9,
+          "pct_counties_no_clinic": 99
+        },
+        {
+          "state": "Montana",
+          "rate_residence": 7.6,
+          "pct_counties_no_clinic": 91
+        },
+        {
+          "state": "Nebraska",
+          "rate_residence": 5.4,
+          "pct_counties_no_clinic": 97
+        },
+        {
+          "state": "New Mexico",
+          "rate_residence": 9.9,
+          "pct_counties_no_clinic": 91
+        },
+        {
+          "state": "North Carolina",
+          "rate_residence": 13,
+          "pct_counties_no_clinic": 91
+        },
+        {
+          "state": "North Dakota",
+          "rate_residence": 6.4,
+          "pct_counties_no_clinic": 98
+        },
+        {
+          "state": "Ohio",
+          "rate_residence": 9.9,
+          "pct_counties_no_clinic": 93
+        },
+        {
+          "state": "Oklahoma",
+          "rate_residence": 10.7,
+          "pct_counties_no_clinic": 96
+        },
+        {
+          "state": "South Carolina",
+          "rate_residence": 11.9,
+          "pct_counties_no_clinic": 93
+        },
+        {
+          "state": "South Dakota",
+          "rate_residence": 4.1,
+          "pct_counties_no_clinic": 98
+        },
+        {
+          "state": "Tennessee",
+          "rate_residence": 7.8,
+          "pct_counties_no_clinic": 95
+        },
+        {
+          "state": "Texas",
+          "rate_residence": 10.1,
+          "pct_counties_no_clinic": 96
+        },
+        {
+          "state": "Utah",
+          "rate_residence": 4.5,
+          "pct_counties_no_clinic": 97
+        },
+        {
+          "state": "Virginia",
+          "rate_residence": 13.8,
+          "pct_counties_no_clinic": 92
+        },
+        {
+          "state": "West Virginia",
+          "rate_residence": 5.7,
+          "pct_counties_no_clinic": 98
+        },
+        {
+          "state": "Wisconsin",
+          "rate_residence": 7.6,
+          "pct_counties_no_clinic": 96
+        },
+        {
+          "state": "Wyoming",
+          "rate_residence": 6.4,
+          "pct_counties_no_clinic": 96
+        }
+      ],
+      "avg": 8.6
+    }
+  },
+  "all_states": [
+    {
+      "state": "Alabama",
+      "pct_counties_no_clinic": 93,
+      "pct_travel_out": 47,
+      "pct_women_no_clinic": 59,
+      "num_clinics": 5,
+      "rate_occurrence": 6,
+      "rate_residence": 9.5,
+      "num_occurrence": 5700,
+      "num_residence": 9060
+    },
+    {
+      "state": "Alaska",
+      "pct_counties_no_clinic": 87,
+      "pct_travel_out": 7,
+      "pct_women_no_clinic": 33,
+      "num_clinics": 4,
+      "rate_occurrence": 8.6,
+      "rate_residence": 9.2,
+      "num_occurrence": 1240,
+      "num_residence": 1320
+    },
+    {
+      "state": "Arizona",
+      "pct_counties_no_clinic": 80,
+      "pct_travel_out": 6,
+      "pct_women_no_clinic": 18,
+      "num_clinics": 8,
+      "rate_occurrence": 9.3,
+      "rate_residence": 9.7,
+      "num_occurrence": 13320,
+      "num_residence": 13820
+    },
+    {
+      "state": "Arkansas",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 37,
+      "pct_women_no_clinic": 86,
+      "num_clinics": 2,
+      "rate_occurrence": 5.6,
+      "rate_residence": 7.8,
+      "num_occurrence": 3250,
+      "num_residence": 4510
+    },
+    {
+      "state": "California",
+      "pct_counties_no_clinic": 38,
+      "pct_travel_out": 0,
+      "pct_women_no_clinic": 3,
+      "num_clinics": 173,
+      "rate_occurrence": 19.2,
+      "rate_residence": 19,
+      "num_occurrence": 154060,
+      "num_residence": 152400
+    },
+    {
+      "state": "Colorado",
+      "pct_counties_no_clinic": 77,
+      "pct_travel_out": 1,
+      "pct_women_no_clinic": 26,
+      "num_clinics": 23,
+      "rate_occurrence": 11.2,
+      "rate_residence": 9.9,
+      "num_occurrence": 13420,
+      "num_residence": 11830
+    },
+    {
+      "state": "Connecticut",
+      "pct_counties_no_clinic": 0,
+      "pct_travel_out": 6,
+      "pct_women_no_clinic": 0,
+      "num_clinics": 20,
+      "rate_occurrence": 16.7,
+      "rate_residence": 17.1,
+      "num_occurrence": 11170,
+      "num_residence": 11460
+    },
+    {
+      "state": "Delaware",
+      "pct_counties_no_clinic": 33,
+      "pct_travel_out": 44,
+      "pct_women_no_clinic": 19,
+      "num_clinics": 3,
+      "rate_occurrence": 10,
+      "rate_residence": 15.8,
+      "num_occurrence": 1830,
+      "num_residence": 2870
+    },
+    {
+      "state": "District of Columbia",
+      "pct_counties_no_clinic": 0,
+      "pct_travel_out": 45,
+      "pct_women_no_clinic": 0,
+      "num_clinics": 5,
+      "rate_occurrence": 48.9,
+      "rate_residence": 26.1,
+      "num_occurrence": 9410,
+      "num_residence": 5010
+    },
+    {
+      "state": "Florida",
+      "pct_counties_no_clinic": 75,
+      "pct_travel_out": 1,
+      "pct_women_no_clinic": 25,
+      "num_clinics": 58,
+      "rate_occurrence": 19.7,
+      "rate_residence": 18.8,
+      "num_occurrence": 77400,
+      "num_residence": 73830
+    },
+    {
+      "state": "Georgia",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 5,
+      "pct_women_no_clinic": 55,
+      "num_clinics": 14,
+      "rate_occurrence": 18.9,
+      "rate_residence": 16.6,
+      "num_occurrence": 41620,
+      "num_residence": 36470
+    },
+    {
+      "state": "Hawaii",
+      "pct_counties_no_clinic": 40,
+      "pct_travel_out": 2,
+      "pct_women_no_clinic": 5,
+      "num_clinics": 4,
+      "rate_occurrence": 12.1,
+      "rate_residence": 12.1,
+      "num_occurrence": 3130,
+      "num_residence": 3120
+    },
+    {
+      "state": "Idaho",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 26,
+      "pct_women_no_clinic": 67,
+      "num_clinics": 3,
+      "rate_occurrence": 4.8,
+      "rate_residence": 6,
+      "num_occurrence": 1690,
+      "num_residence": 2130
+    },
+    {
+      "state": "Illinois",
+      "pct_counties_no_clinic": 89,
+      "pct_travel_out": 1,
+      "pct_women_no_clinic": 32,
+      "num_clinics": 30,
+      "rate_occurrence": 21.3,
+      "rate_residence": 17.1,
+      "num_occurrence": 52780,
+      "num_residence": 42250
+    },
+    {
+      "state": "Indiana",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 31,
+      "pct_women_no_clinic": 66,
+      "num_clinics": 7,
+      "rate_occurrence": 6,
+      "rate_residence": 8.2,
+      "num_occurrence": 7880,
+      "num_residence": 10810
+    },
+    {
+      "state": "Iowa",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 12,
+      "pct_women_no_clinic": 65,
+      "num_clinics": 6,
+      "rate_occurrence": 5.9,
+      "rate_residence": 5.9,
+      "num_occurrence": 3510,
+      "num_residence": 3510
+    },
+    {
+      "state": "Kansas",
+      "pct_counties_no_clinic": 98,
+      "pct_travel_out": 4,
+      "pct_women_no_clinic": 60,
+      "num_clinics": 4,
+      "rate_occurrence": 14.5,
+      "rate_residence": 7.3,
+      "num_occurrence": 8180,
+      "num_residence": 4120
+    },
+    {
+      "state": "Kentucky",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 39,
+      "pct_women_no_clinic": 82,
+      "num_clinics": 2,
+      "rate_occurrence": 4.8,
+      "rate_residence": 6.7,
+      "num_occurrence": 4080,
+      "num_residence": 5690
+    },
+    {
+      "state": "Louisiana",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 21,
+      "pct_women_no_clinic": 75,
+      "num_clinics": 3,
+      "rate_occurrence": 8,
+      "rate_residence": 8.4,
+      "num_occurrence": 7360,
+      "num_residence": 7760
+    },
+    {
+      "state": "Maine",
+      "pct_counties_no_clinic": 12,
+      "pct_travel_out": 5,
+      "pct_women_no_clinic": 16,
+      "num_clinics": 17,
+      "rate_occurrence": 10.1,
+      "rate_residence": 10.1,
+      "num_occurrence": 2370,
+      "num_residence": 2370
+    },
+    {
+      "state": "Maryland",
+      "pct_counties_no_clinic": 62,
+      "pct_travel_out": 17,
+      "pct_women_no_clinic": 23,
+      "num_clinics": 23,
+      "rate_occurrence": 25.9,
+      "rate_residence": 24.9,
+      "num_occurrence": 30750,
+      "num_residence": 29590
+    },
+    {
+      "state": "Massachusetts",
+      "pct_counties_no_clinic": 50,
+      "pct_travel_out": 6,
+      "pct_women_no_clinic": 14,
+      "num_clinics": 17,
+      "rate_occurrence": 12.2,
+      "rate_residence": 12.5,
+      "num_occurrence": 17060,
+      "num_residence": 17460
+    },
+    {
+      "state": "Michigan",
+      "pct_counties_no_clinic": 86,
+      "pct_travel_out": 1,
+      "pct_women_no_clinic": 34,
+      "num_clinics": 24,
+      "rate_occurrence": 16.8,
+      "rate_residence": 16.1,
+      "num_occurrence": 31500,
+      "num_residence": 30150
+    },
+    {
+      "state": "Minnesota",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 3,
+      "pct_women_no_clinic": 58,
+      "num_clinics": 10,
+      "rate_occurrence": 10.2,
+      "rate_residence": 9.5,
+      "num_occurrence": 11060,
+      "num_residence": 10380
+    },
+    {
+      "state": "Mississippi",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 44,
+      "pct_women_no_clinic": 92,
+      "num_clinics": 1,
+      "rate_occurrence": 6.1,
+      "rate_residence": 9.9,
+      "num_occurrence": 3560,
+      "num_residence": 5760
+    },
+    {
+      "state": "Missouri",
+      "pct_counties_no_clinic": 99,
+      "pct_travel_out": 99,
+      "pct_women_no_clinic": 94,
+      "num_clinics": 1,
+      "rate_occurrence": 0.1,
+      "rate_residence": 9.9,
+      "num_occurrence": 170,
+      "num_residence": 11710
+    },
+    {
+      "state": "Montana",
+      "pct_counties_no_clinic": 91,
+      "pct_travel_out": 3,
+      "pct_women_no_clinic": 47,
+      "num_clinics": 6,
+      "rate_occurrence": 8.2,
+      "rate_residence": 7.6,
+      "num_occurrence": 1630,
+      "num_residence": 1510
+    },
+    {
+      "state": "Nebraska",
+      "pct_counties_no_clinic": 97,
+      "pct_travel_out": 8,
+      "pct_women_no_clinic": 39,
+      "num_clinics": 3,
+      "rate_occurrence": 5.9,
+      "rate_residence": 5.4,
+      "num_occurrence": 2200,
+      "num_residence": 2020
+    },
+    {
+      "state": "Nevada",
+      "pct_counties_no_clinic": 88,
+      "pct_travel_out": 4,
+      "pct_women_no_clinic": 9,
+      "num_clinics": 9,
+      "rate_occurrence": 17.9,
+      "rate_residence": 17.7,
+      "num_occurrence": 11010,
+      "num_residence": 10870
+    },
+    {
+      "state": "New Hampshire",
+      "pct_counties_no_clinic": 60,
+      "pct_travel_out": 23,
+      "pct_women_no_clinic": 30,
+      "num_clinics": 4,
+      "rate_occurrence": 8.3,
+      "rate_residence": 8.7,
+      "num_occurrence": 2050,
+      "num_residence": 2150
+    },
+    {
+      "state": "New Jersey",
+      "pct_counties_no_clinic": 29,
+      "pct_travel_out": 6,
+      "pct_women_no_clinic": 21,
+      "num_clinics": 37,
+      "rate_occurrence": 29.2,
+      "rate_residence": 28.9,
+      "num_occurrence": 48830,
+      "num_residence": 48390
+    },
+    {
+      "state": "New Mexico",
+      "pct_counties_no_clinic": 91,
+      "pct_travel_out": 8,
+      "pct_women_no_clinic": 48,
+      "num_clinics": 6,
+      "rate_occurrence": 14.7,
+      "rate_residence": 9.9,
+      "num_occurrence": 5880,
+      "num_residence": 3950
+    },
+    {
+      "state": "New York",
+      "pct_counties_no_clinic": 37,
+      "pct_travel_out": 1,
+      "pct_women_no_clinic": 6,
+      "num_clinics": 104,
+      "rate_occurrence": 28.8,
+      "rate_residence": 27.6,
+      "num_occurrence": 110360,
+      "num_residence": 105990
+    },
+    {
+      "state": "North Carolina",
+      "pct_counties_no_clinic": 91,
+      "pct_travel_out": 2,
+      "pct_women_no_clinic": 53,
+      "num_clinics": 16,
+      "rate_occurrence": 15.3,
+      "rate_residence": 13,
+      "num_occurrence": 31850,
+      "num_residence": 27030
+    },
+    {
+      "state": "North Dakota",
+      "pct_counties_no_clinic": 98,
+      "pct_travel_out": 13,
+      "pct_women_no_clinic": 72,
+      "num_clinics": 1,
+      "rate_occurrence": 7.8,
+      "rate_residence": 6.4,
+      "num_occurrence": 1170,
+      "num_residence": 960
+    },
+    {
+      "state": "Ohio",
+      "pct_counties_no_clinic": 93,
+      "pct_travel_out": 10,
+      "pct_women_no_clinic": 55,
+      "num_clinics": 10,
+      "rate_occurrence": 9.5,
+      "rate_residence": 9.9,
+      "num_occurrence": 20990,
+      "num_residence": 21920
+    },
+    {
+      "state": "Oklahoma",
+      "pct_counties_no_clinic": 96,
+      "pct_travel_out": 5,
+      "pct_women_no_clinic": 53,
+      "num_clinics": 5,
+      "rate_occurrence": 12.4,
+      "rate_residence": 10.7,
+      "num_occurrence": 9690,
+      "num_residence": 8330
+    },
+    {
+      "state": "Oregon",
+      "pct_counties_no_clinic": 75,
+      "pct_travel_out": 5,
+      "pct_women_no_clinic": 22,
+      "num_clinics": 17,
+      "rate_occurrence": 10.3,
+      "rate_residence": 9.7,
+      "num_occurrence": 8560,
+      "num_residence": 8110
+    },
+    {
+      "state": "Pennsylvania",
+      "pct_counties_no_clinic": 82,
+      "pct_travel_out": 14,
+      "pct_women_no_clinic": 38,
+      "num_clinics": 17,
+      "rate_occurrence": 13.6,
+      "rate_residence": 14.7,
+      "num_occurrence": 32260,
+      "num_residence": 34950
+    },
+    {
+      "state": "Rhode Island",
+      "pct_counties_no_clinic": 80,
+      "pct_travel_out": 17,
+      "pct_women_no_clinic": 36,
+      "num_clinics": 1,
+      "rate_occurrence": 13.3,
+      "rate_residence": 13.6,
+      "num_occurrence": 2760,
+      "num_residence": 2830
+    },
+    {
+      "state": "South Carolina",
+      "pct_counties_no_clinic": 93,
+      "pct_travel_out": 57,
+      "pct_women_no_clinic": 71,
+      "num_clinics": 3,
+      "rate_occurrence": 5.3,
+      "rate_residence": 11.9,
+      "num_occurrence": 5300,
+      "num_residence": 11830
+    },
+    {
+      "state": "South Dakota",
+      "pct_counties_no_clinic": 98,
+      "pct_travel_out": 84,
+      "pct_women_no_clinic": 76,
+      "num_clinics": 1,
+      "rate_occurrence": 0.8,
+      "rate_residence": 4.1,
+      "num_occurrence": 130,
+      "num_residence": 680
+    },
+    {
+      "state": "Tennessee",
+      "pct_counties_no_clinic": 95,
+      "pct_travel_out": 23,
+      "pct_women_no_clinic": 61,
+      "num_clinics": 7,
+      "rate_occurrence": 8.1,
+      "rate_residence": 7.8,
+      "num_occurrence": 10850,
+      "num_residence": 10450
+    },
+    {
+      "state": "Texas",
+      "pct_counties_no_clinic": 96,
+      "pct_travel_out": 8,
+      "pct_women_no_clinic": 44,
+      "num_clinics": 24,
+      "rate_occurrence": 9.5,
+      "rate_residence": 10.1,
+      "num_occurrence": 58020,
+      "num_residence": 61500
+    },
+    {
+      "state": "Utah",
+      "pct_counties_no_clinic": 97,
+      "pct_travel_out": 8,
+      "pct_women_no_clinic": 64,
+      "num_clinics": 2,
+      "rate_occurrence": 4.4,
+      "rate_residence": 4.5,
+      "num_occurrence": 3120,
+      "num_residence": 3220
+    },
+    {
+      "state": "Vermont",
+      "pct_counties_no_clinic": 64,
+      "pct_travel_out": 7,
+      "pct_women_no_clinic": 38,
+      "num_clinics": 6,
+      "rate_occurrence": 10.7,
+      "rate_residence": 9.5,
+      "num_occurrence": 1230,
+      "num_residence": 1100
+    },
+    {
+      "state": "Virginia",
+      "pct_counties_no_clinic": 92,
+      "pct_travel_out": 25,
+      "pct_women_no_clinic": 79,
+      "num_clinics": 17,
+      "rate_occurrence": 11,
+      "rate_residence": 13.8,
+      "num_occurrence": 18740,
+      "num_residence": 23390
+    },
+    {
+      "state": "Washington",
+      "pct_counties_no_clinic": 56,
+      "pct_travel_out": 5,
+      "pct_women_no_clinic": 9,
+      "num_clinics": 37,
+      "rate_occurrence": 11.7,
+      "rate_residence": 11.6,
+      "num_occurrence": 17980,
+      "num_residence": 17910
+    },
+    {
+      "state": "West Virginia",
+      "pct_counties_no_clinic": 98,
+      "pct_travel_out": 52,
+      "pct_women_no_clinic": 90,
+      "num_clinics": 1,
+      "rate_occurrence": 3.1,
+      "rate_residence": 5.7,
+      "num_occurrence": 990,
+      "num_residence": 1780
+    },
+    {
+      "state": "Wisconsin",
+      "pct_counties_no_clinic": 96,
+      "pct_travel_out": 17,
+      "pct_women_no_clinic": 68,
+      "num_clinics": 4,
+      "rate_occurrence": 6.4,
+      "rate_residence": 7.6,
+      "num_occurrence": 6960,
+      "num_residence": 8290
+    },
+    {
+      "state": "Wyoming",
+      "pct_counties_no_clinic": 96,
+      "pct_travel_out": 88,
+      "pct_women_no_clinic": 96,
+      "num_clinics": 2,
+      "rate_occurrence": 0.9,
+      "rate_residence": 6.4,
+      "num_occurrence": 100,
+      "num_residence": 700
+    }
+  ]
+}
