@@ -16,6 +16,7 @@
   },
   "type": "module",
   "dependencies": {
+    "svelte-scrolly": "^0.0.4",
     "three": "^0.163.0"
   }
 }
