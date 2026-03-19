@@ -2,4 +2,3 @@ node_modules
 .DS_Store
 /build
 /.svelte-kit
-static/loc.csv
