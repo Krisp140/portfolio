@@ -10,6 +10,7 @@
       <img src="{project.image.startsWith('/') ? base + project.image : project.image}" alt="{project.title} screenshot" class="project-img">
       <div class="project-body">
         <h3>{project.title}</h3>
+        <span class="project-year">{project.year}</span>
         <p>{project.description}</p>
         <div class="project-tags">
           {#each project.tags as tag}
@@ -22,6 +23,7 @@
     <img src="{project.image.startsWith('/') ? base + project.image : project.image}" alt="{project.title} screenshot" class="project-img">
     <div class="project-body">
       <h3>{project.title}</h3>
+      <span class="project-year">{project.year}</span>
       <p>{project.description}</p>
       <div class="project-tags">
         {#each project.tags as tag}
