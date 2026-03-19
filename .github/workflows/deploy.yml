@@ -27,6 +27,12 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Install cloc
+        run: sudo apt-get install -y cloc
+
+      - name: Generate loc.csv
+        run: cloc --csv --quiet --hide-rate --include-lang=Svelte,JavaScript,CSS,HTML,JSON,Python,YAML,CSV . > static/loc.csv
+
       - name: Install dependencies
         run: npm ci
 
