@@ -2,159 +2,79 @@
   import { onMount } from 'svelte';
   import { base } from '$app/paths';
   import * as d3 from 'd3';
+  import Scatterplot from '$lib/components/Scatterplot.svelte';
+  import Bar from '$lib/components/Bar.svelte';
+  import LineChart from '$lib/components/LineChart.svelte';
 
-  let locContainer;
-  let locData = $state([]);
+  let locData = [];
+  let commits = [];
+  let clickedCommits = [];
+  let brushedCommits = [];
+  let linesByDate = [];
+
+  $: selectedCommits = Array.from(new Set([...clickedCommits, ...brushedCommits]));
+  $: selectedLines = (selectedCommits.length > 0 ? selectedCommits : commits).flatMap(d => d.lines);
+
+  $: barTitle = selectedCommits.length > 0
+    ? `Lines of Code: ${selectedCommits.length} Selected Commits`
+    : `Lines of Code: ${commits.length} Total Commits`;
+
+  $: {
+    if (locData.length > 0) {
+      // Lines edited by date for the line chart
+      const rolled = d3.rollups(locData, v => d3.sum(v, d => d.lines), d => d3.timeDay.floor(d.date))
+        .map(([date, count]) => ({ date, count }));
+
+      if (rolled.length > 0) {
+        const [minDate, maxDate] = d3.extent(rolled, d => d.date);
+        const allDays = d3.timeDays(minDate, d3.timeDay.offset(maxDate, 1));
+
+        linesByDate = allDays.map(date => ({
+          date,
+          count: rolled.find(r => r.date.getTime() === date.getTime())?.count ?? 0
+        }));
+      }
+    }
+  }
 
   onMount(async () => {
-    const res = await fetch(`${base}/loc.csv`);
+    const res = await fetch(`${base}/commit_data.csv`);
     const text = await res.text();
-    const rows = d3.csvParseRows(text);
+    const raw = d3.csvParse(text, row => ({
+      commit: row.commit,
+      date: new Date(row.date),
+      file: row.file,
+      language: row.language,
+      lines: +row.lines,
+    }));
 
-    locData = rows
-      .filter(row => row[1] !== 'SUM' && row[1] !== 'language')
-      .map(row => ({
-        language: row[1],
-        code: +row[4]
-      }))
-      .sort((a, b) => b.code - a.code);
+    locData = raw;
 
-    renderLocChart();
+    // Group by commit to create commit objects
+    const grouped = d3.groups(raw, d => d.commit);
+    commits = grouped.map(([id, lines]) => {
+      const datetime = lines[0].date;
+      return {
+        id,
+        datetime,
+        hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
+        totalLines: d3.sum(lines, d => d.lines),
+        lines,
+      };
+    }).sort((a, b) => a.datetime - b.datetime);
   });
 
-  function renderLocChart() {
-    if (!locContainer || locData.length === 0) return;
+  function handleClickCommit(commit) {
+    const idx = clickedCommits.indexOf(commit);
+    if (idx >= 0) {
+      clickedCommits = [...clickedCommits.slice(0, idx), ...clickedCommits.slice(idx + 1)];
+    } else {
+      clickedCommits = [...clickedCommits, commit];
+    }
+  }
 
-    const margin = { top: 50, right: 30, bottom: 50, left: 120 };
-    const width = 700;
-    const barHeight = 36;
-    const height = locData.length * barHeight + margin.top + margin.bottom;
-
-    d3.select(locContainer).selectAll('*').remove();
-
-    const svg = d3.select(locContainer)
-      .append('svg')
-      .attr('viewBox', `0 0 ${width + margin.left + margin.right + 200} ${height}`)
-      .attr('width', '100%')
-      .attr('style', 'max-width: 900px;');
-
-    const g = svg.append('g')
-      .attr('transform', `translate(${margin.left},${margin.top})`);
-
-    const colorScale = d3.scaleOrdinal(d3.schemeTableau10)
-      .domain(locData.map(d => d.language));
-
-    const x = d3.scaleLinear()
-      .domain([0, d3.max(locData, d => d.code)])
-      .nice()
-      .range([0, width]);
-
-    const y = d3.scaleBand()
-      .domain(locData.map(d => d.language))
-      .range([0, height - margin.top - margin.bottom])
-      .padding(0.25);
-
-    g.append('g')
-      .attr('transform', `translate(0,${height - margin.top - margin.bottom})`)
-      .call(d3.axisBottom(x).ticks(6))
-      .selectAll('text')
-      .style('fill', 'var(--text-dim)')
-      .style('font-family', 'var(--font-mono)')
-      .style('font-size', '0.7rem');
-
-    g.append('g')
-      .call(d3.axisLeft(y))
-      .selectAll('text')
-      .style('fill', 'var(--text-dim)')
-      .style('font-family', 'var(--font-mono)')
-      .style('font-size', '0.75rem');
-
-    g.selectAll('.domain, .tick line').attr('stroke', 'var(--wire-strong)');
-
-    g.selectAll('.bar')
-      .data(locData)
-      .join('rect')
-      .attr('class', 'bar')
-      .attr('x', 0)
-      .attr('y', d => y(d.language))
-      .attr('width', d => x(d.code))
-      .attr('height', y.bandwidth())
-      .attr('fill', d => colorScale(d.language));
-
-    // Title
-    svg.append('text')
-      .attr('x', margin.left + width / 2)
-      .attr('y', 20)
-      .attr('text-anchor', 'middle')
-      .style('fill', 'var(--text)')
-      .style('font-family', 'var(--font-display)')
-      .style('font-size', '1.3rem')
-      .text('Lines of Code by Language');
-
-    // X-axis label
-    g.append('text')
-      .attr('x', width / 2)
-      .attr('y', height - margin.top - margin.bottom + 40)
-      .attr('text-anchor', 'middle')
-      .style('fill', 'var(--text-dim)')
-      .style('font-family', 'var(--font-mono)')
-      .style('font-size', '0.75rem')
-      .text('Lines of Code');
-
-    // Y-axis label
-    g.append('text')
-      .attr('transform', 'rotate(-90)')
-      .attr('x', -(height - margin.top - margin.bottom) / 2)
-      .attr('y', -100)
-      .attr('text-anchor', 'middle')
-      .style('fill', 'var(--text-dim)')
-      .style('font-family', 'var(--font-mono)')
-      .style('font-size', '0.75rem')
-      .text('Language');
-
-    // Legend
-    const legend = svg.append('g')
-      .attr('transform', `translate(${margin.left + width + 30}, ${margin.top})`);
-
-    locData.forEach((d, i) => {
-      const row = legend.append('g')
-        .attr('transform', `translate(0, ${i * 22})`);
-      row.append('rect')
-        .attr('width', 14)
-        .attr('height', 14)
-        .attr('fill', colorScale(d.language));
-      row.append('text')
-        .attr('x', 20)
-        .attr('y', 11)
-        .style('fill', 'var(--text-dim)')
-        .style('font-family', 'var(--font-mono)')
-        .style('font-size', '0.7rem')
-        .text(d.language);
-    });
-
-    // Annotation: language with most LOC
-    const maxLang = locData[0];
-    const annotX = x(maxLang.code) + 5;
-    const annotY = y(maxLang.language) + y.bandwidth() / 2;
-
-    // Leader line
-    g.append('line')
-      .attr('x1', annotX)
-      .attr('y1', annotY)
-      .attr('x2', annotX + 40)
-      .attr('y2', annotY - 25)
-      .attr('stroke', 'var(--accent)')
-      .attr('stroke-width', 1.5);
-
-    // Annotation text
-    g.append('text')
-      .attr('x', annotX + 45)
-      .attr('y', annotY - 28)
-      .style('fill', 'var(--accent)')
-      .style('font-family', 'var(--font-mono)')
-      .style('font-size', '0.7rem')
-      .style('font-weight', '500')
-      .text(`${maxLang.language}: ${maxLang.code.toLocaleString()} lines`);
+  function handleBrush(brushed) {
+    brushedCommits = brushed;
   }
 </script>
 
@@ -170,11 +90,26 @@
   <h1>Site Statistics</h1>
 
   <p class="meta-intro">
-    A look under the hood &mdash; how this portfolio is built, measured in lines of code
-    across languages.
+    A look under the hood &mdash; how this portfolio is built, measured in commits,
+    lines of code, and editing patterns over time.
   </p>
 
-  <div class="chart-container" bind:this={locContainer}></div>
+  {#if commits.length > 0}
+    <h2>Commits by Time of Day</h2>
+    <Scatterplot
+      {commits}
+      {selectedCommits}
+      {clickedCommits}
+      onClickCommit={handleClickCommit}
+      onBrush={handleBrush}
+    />
+
+    <Bar data={selectedLines} title={barTitle} />
+
+    <LineChart data={linesByDate} />
+  {:else}
+    <p>Loading commit data&hellip;</p>
+  {/if}
 </main>
 
 <style>
@@ -185,7 +120,8 @@
     margin-bottom: 2rem;
   }
 
-  .chart-container {
-    margin: 2rem 0 3rem;
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
   }
 </style>

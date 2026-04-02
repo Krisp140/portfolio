@@ -3,3 +3,4 @@ node_modules
 /build
 /.svelte-kit
 static/loc.csv
+static/commit_data.csv
