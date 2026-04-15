@@ -48,10 +48,6 @@
 
   $: hoveredCommit = hoveredIndex >= 0 ? commits[hoveredIndex] : null;
 
-  function isHovered(commit) {
-    return hoveredCommit && commit.id === hoveredCommit.id;
-  }
-
   function brushed(evt) {
     brushSelection = evt.selection;
     if (!brushSelection) {
@@ -93,9 +89,9 @@
         class:selected={selectedCommits.includes(commit)}
         cx={xScale(commit.datetime)}
         cy={yScale(commit.hourFrac)}
-        r={isHovered(commit) ? rScale(commit.totalLines) * 1.3 : rScale(commit.totalLines)}
+        r={hoveredCommit?.id === commit.id ? rScale(commit.totalLines) * 1.3 : rScale(commit.totalLines)}
         fill="steelblue"
-        opacity={isHovered(commit) ? 1 : 0.7}
+        opacity="0.7"
         on:mouseenter={() => {
           hoveredIndex = commits.indexOf(commit);
         }}

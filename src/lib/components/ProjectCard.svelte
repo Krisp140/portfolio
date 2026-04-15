@@ -2,11 +2,18 @@
   import { base } from '$app/paths';
 
   let { project } = $props();
+  let isExternalLink = $derived(project.link?.startsWith('http'));
+  let href = $derived(isExternalLink ? project.link : `${base}${project.link}`);
 </script>
 
 <div class="project-card">
   {#if project.link}
-    <a href="{base}{project.link}" style="text-decoration:none;color:inherit;display:block;">
+    <a
+      href={href}
+      target={isExternalLink ? '_blank' : undefined}
+      rel={isExternalLink ? 'noopener noreferrer' : undefined}
+      style="text-decoration:none;color:inherit;display:block;"
+    >
       <img src="{project.image.startsWith('/') ? base + project.image : project.image}" alt="{project.title} screenshot" class="project-img">
       <div class="project-body">
         <h3>{project.title}</h3>

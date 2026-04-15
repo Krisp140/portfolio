@@ -1,5 +1,17 @@
 export const projects = [
   {
+    title: 'BikeWatch: BlueBike Demand Map',
+    description:
+      'Interactive Mapbox visualization of BlueBike station demand with time filtering and isochrone overlays.',
+    image: '/images/bike.avif',
+    tags: ['Mapbox', 'D3', 'Data Visualization'],
+    link: 'https://krisp140.github.io/bikewatch/',
+    featured: true,
+    year: 2026,
+    story:
+      'I mapped every BlueBike station in Boston and Cambridge, coloring them by net demand (arrivals vs departures) and sizing by total ridership. A time slider lets you scrub through hours of the day, and clicking a station reveals a cycling isochrone showing how far you can ride in 5, 10, or 15 minutes.'
+  },
+  {
     title: 'COVID-19 Visualization Redesign',
     description:
       'A critique and redesign of the NYT spiral COVID-19 chart. Features an interactive 3D terrain visualization built with Three.js mapping case volume and fatality rate.',
