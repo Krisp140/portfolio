@@ -2,9 +2,7 @@
   import { base } from '$app/paths';
   import { onMount } from 'svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
-  import ReadingItem from '$lib/components/ReadingItem.svelte';
   import { projects } from '$lib/data/projects.js';
-  import { readingList } from '$lib/data/reading-list.js';
 
   const featuredProjects = projects.filter((p) => p.featured);
 
@@ -113,13 +111,6 @@
   <div class="projects-grid">
     {#each featuredProjects as project}
       <ProjectCard {project} />
-    {/each}
-  </div>
-
-  <h2>What I'm Reading</h2>
-  <div class="reading-list">
-    {#each readingList as item}
-      <ReadingItem {item} />
     {/each}
   </div>
 </main>
